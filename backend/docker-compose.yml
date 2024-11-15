@@ -1,0 +1,21 @@
+
+services:
+  postgres:
+    container_name: wunju.pg
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD: postgres
+      - POSTGRES_USER: postgres
+      - POSTGRES_DB: wunju-db
+    ports:
+      - "5432:5432"
+  server:
+    container_name: wunju.backend
+    depends_on:
+      - postgres
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/usr/app"
+    command: npm run dev
