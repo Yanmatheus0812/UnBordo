@@ -10,7 +10,7 @@ nav:
     - Ata 1: "atas-reuniao/ata-reuniao-1.md"
     - Reunião 5 - 21/11/2024: "atas-reuniao/ata-reuniao-5"
   - Documentos sobre gamificação: 
-    - Relatório do formulário: "documento-gamificacao/relatorio-formulario.md"
+    - Relatório do formulário: "documentos-gamificacao/relatorio-formulario.md"
 
 theme:
   name: material
