@@ -8,6 +8,7 @@ nav:
   - Documento de Plano de Testes: "documento-plano-testes/documento-plano-testes.md"
   - Atas de Reunião:
     - Ata 1: "atas-reuniao/ata-reuniao-1.md"
+    - Reunião 5 - 21/11/2024: "atas-reuniao/ata-reuniao-5"
 
 theme:
   name: material
