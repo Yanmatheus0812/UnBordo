@@ -17,7 +17,8 @@ A reunião foi iniciada às 20:00 e finalizada às 21:03.
 Definir com a equipe de frontend a plataforma e tecnologias que serão utilizadas no desenvolvimento da aplicação.
 
 ### Gravação da reunião
-https://www.youtube.com/watch?v=VNGc3QSlBV0
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VNGc3QSlBV0?si=X1l3uVtrUdB1P0T2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Histórico de versão
 
