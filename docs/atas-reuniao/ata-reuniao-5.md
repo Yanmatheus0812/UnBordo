@@ -8,6 +8,7 @@ Reunião realizada no Microsoft Teams
 - Giovana Fontes
 - Gustavo Linhares
 - Letícia Lopes
+- David William
 
 ### Início e término
 A reunião foi iniciada às 20:00 e finalizada às 21:03.
