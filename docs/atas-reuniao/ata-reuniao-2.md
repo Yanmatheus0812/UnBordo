@@ -4,12 +4,8 @@ Reunião realizada no Microsoft Teams
 
 ### Participantes
 - Arthur Evangelista
-- David William
 - Gabriel Magioli
 - Giovana Fontes
-- Letícia Lopes
-- Sophia Souza
-- Willian Wagner
 - Yan Aguiar
 
 ### Início e término
@@ -27,3 +23,4 @@ Criação do formulário de análise de players para o Plano Geral de Gamificaç
 | Versão |    Data    | Descrição da Alteração | Nome(s) Integrante(s) |
 | :----: | :--------: | :--------------------: | :-------------------: |
 |  1.0   | 25/11/2024 |  Criação do documento  |      Sophia Souza     |
+|  1.0   | 25/11/2024 |Alter. dos participantes|      Sophia Souza     |
