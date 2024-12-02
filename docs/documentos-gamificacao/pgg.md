@@ -1,3 +1,24 @@
+**Integrantes do Grupo:**
+
+| Mat.      | Nome                                   | Responsabilidade          |
+| :-------- | :------------------------------------- | :------------------------ |
+| 231027032 | ARTHUR EVANGELISTA DE OLIVEIRA         | A gamificação             |
+| 232001649 | DAVID WILLIAM LEMOS FERREIRA           | Análise do documento      |
+| 232013980 | GABRIEL ANDRADE MAGIOLI                | A gamificação             |
+| 231038644 | GIOVANA DE SOUZA FONTES                | A gamificação             |
+| 222008691 | GUSTAVO RIBEIRO LINHARES               | A gamificação             |
+| 221022604 | JOÃO VICTOR DA SILVA BATISTA DE FARIAS | Análise do documento      |
+| 231035455 | LETICIA MARIA DE JESUS LOPES           | A gamificação             |
+| 231026886 | SOPHIA SOUZA DA SILVA                  | Análise do documento      |
+| 231011865 | WILLIAN WAGNER XAVIER RAMOS DA SILVA   | A gamificação             |
+| 231038303 | YAN MATHEUS SANTA BRIGIDA DE AGUIAR    | A gamificação             |
+
+**Histórico de Revisões**
+
+| Data           | Versão | Descrição                    | Autor                         |
+| :------------- | :----- | :--------------------------- | :---------------------------- |
+| **02/12/2024** | 0.1    | Primeira versão do documento | Arthur, Gabriel, Giovanna, Gustavo, Leticia, Willian, Yan |
+
 # **Objetivo do documento**
 
 Esse documento tem como objetivo apresentar de maneira detalhada a abordagem técnica da gamificação da aplicação. Esse documento usa como base o “relatório do formulário da gamificação”, no qual foi definido os tipos de players que serão levados em consideração na construção da aplicação, seguindo os estudos da ferramenta Hexad. 
