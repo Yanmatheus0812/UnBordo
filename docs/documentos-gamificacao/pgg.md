@@ -297,8 +297,8 @@ Para que haja maior controle no aplicativo, tem algumas limitações. Cada usuá
 
 - **Itens especiais**
 
-Apostas: O jogador poderá adquirir uma aposta utilizando joias. A aposta possui um fator de multiplicação, ou seja, para qualquer coisa, seja ela boa ou ruim, o jogador receberá em dobro.  
-Ofensiva: será um contador que possui um fator de multiplicação dos pontos do usuário. A cada determinada quantidade de dias seguidos contribuindo no aprendizado de outro usuário, o fator multiplicativo será aumentado, caso o usuário deixe de ajudar alguém durante 1 dia, esse fator multiplicativo será zerado e o usuário deverá reiniciar sua ofensiva.
+**Apostas:** O jogador poderá adquirir uma aposta utilizando joias. A aposta possui um fator de multiplicação, ou seja, para qualquer coisa, seja ela boa ou ruim, o jogador receberá em dobro.  
+**Ofensiva:** será um contador que possui um fator de multiplicação dos pontos do usuário. A cada determinada quantidade de dias seguidos contribuindo no aprendizado de outro usuário, o fator multiplicativo será aumentado, caso o usuário deixe de ajudar alguém durante 1 dia, esse fator multiplicativo será zerado e o usuário deverá reiniciar sua ofensiva.
 
 - **Artefatos:** 
 
