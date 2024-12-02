@@ -86,11 +86,11 @@ A imprevisibilidade está integrada em diversas partes da experiência. Por exem
 Através das ferramentas usadas na gamificação, foi elaborado um “Radar Chart”, um gráfico de proximidade da gamificação com os Core Drives da ferramenta Octalysis.
 
 ![](octalysis-1.png)
-<center>Ferramenta Octalysis não aplicada a nenhuma gamificação.</center>
+<center>Imagem 1: Ferramenta Octalysis não aplicada a nenhuma gamificação.</center>
 
 --------------
 ![](octalysis-2.png)
-<center>Ferramenta Octalysis aplicada a gamificação da tutoria gamificada.</center>
+<center>Imagem 2: Ferramenta Octalysis aplicada a gamificação da tutoria gamificada.</center>
 --------------
 
 ## **A gamificação**
