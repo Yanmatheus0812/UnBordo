@@ -60,20 +60,39 @@ O estudo baseia-se na **ferramenta Hexad**, que define seis tipos de perfis de j
 ### 1. **Achiever (Realizador)**
 - **92,3%** consideram o progresso e a conquista de metas como importantes.
 
+![](Grafico-1.png)
+<center>Imagem 1: Gráfico de respostas Achiever</center>
+
+
 ### 2. **Philanthropist (Filantropo)**
 - **92,3%** sentem-se motivados ao ajudar os outros.
+  
+![](Grafico-2.png)
+<center>Imagem 2: Gráfico de respostas Philantropist</center>
 
 ### 3. **Player (Jogador)**
 - **74,4%** valorizam recompensas por ajudar.
 
+![](Grafico-3.png)
+<center>Imagem 3: Gráfico de respostas Player</center>
+
 ### 4. **Socializer (Socializador)**
 - **51,3%** preferem trabalhar em grupo.
+
+![](Grafico-4.png)
+<center>Imagem 4: Gráfico de respostas Socializer</center>
 
 ### 5. **Free Spirit (Espírito Livre)**
 - **97,4%** sentem-se motivados pela autonomia.
 
+![](Grafico-5.png)
+<center>Imagem 5: Gráfico de respostas Free Spirit</center>
+
 ### 6. **Disruptor (Revolucionário)**
 - **78,2%** gostam de desafiar as regras e propor melhorias.
+  
+![](Grafico-6.png)
+<center>Imagem 6: Gráfico de respostas Disruptor</center>
 
 ---
 
