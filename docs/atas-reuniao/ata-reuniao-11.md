@@ -12,14 +12,14 @@ Reunião realizada no Microsoft Teams
 - Yan Aguiar
 
 ### Início e término
-A reunião foi iniciada às 18:00 e finalizada às 20:00.
+A reunião foi iniciada às 20:00 e finalizada às 21:25.
 
 ### Objetivo
 Apresentar e validar o Plano Geral de Gamificação com o cliente.
 
 ### Gravação da reunião
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TA6IiZZQkm0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r2QREG2MWgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Histórico de versão
 
