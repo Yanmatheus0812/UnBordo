@@ -53,6 +53,8 @@ A plataforma solicitada pelo cliente consiste em uma aplicação voltada para a 
 | RQ33 | O sistema deverá exibir no ranking dos tutores cada tutor junto de suas médias e quantidade de atendimentos completos.                                                             |
 | RQ34 | O sistema deverá receber a matrícula do aluno e enviar para o email institucional uma validação de cadastro.                                                             |
 | RQ35 | A gamificação deverá possuir temporadas com duração de 6 meses onde os rankings serão reiniciados após esse tempo.                                                            |
+| RQ36 | O sistema devera permitir que os usuarios coloquem uma foto de perfil.                                                            |
+
 
 ## **Requisitos Não Funcionais**
 
