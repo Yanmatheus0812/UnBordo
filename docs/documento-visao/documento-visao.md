@@ -18,6 +18,7 @@
 | Data           | Versão | Descrição                    | Autor                         |
 | :------------- | :----- | :--------------------------- | :---------------------------- |
 | **24/11/2024** | 0.1    | Primeira versão do documento | David, Gabriel, João e Sophia |
+| **13/12/2024** | 0.2    | Atualização do documento | Sophia |
 
 
 ## **VISÃO GERAL DO PRODUTO**
@@ -39,7 +40,7 @@ Nosso software visa solucionar um problema presente na comunidade acadêmica da 
 | -----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |                   Necessidade: | A comunidade estudantil precisa de tutores para tirar dúvidas sobre determinados assuntos que estão estudando.                                                                                                         |
 <!-- TODO: Change mobile app name -->
-| O Wunjo \- Tutoria Gamificada: | é um aplicativo mobile chamado Wunjo \- A aventura do conhecimento.                                                                                                                                                  |
+| O Wunjo \- Tutoria Gamificada: | é um aplicativo mobile chamado UnBordo - A aventura do conhecimento.                                                                                                                                                  |
 |                           Que: | Facilita aos estudantes comunicarem suas dúvidas e serem ajudados por qualquer membro da comunidade que possua o conhecimento de forma simples e prática.                                                              |
 |                  Ao contrário: | Muitos alunos não conseguem participar de monitorias/tutorias por conta de horários incompatíveis, vergonha ou outros motivos, e acabam ficando com suas dúvidas não resolvidas.                                       |
 |                 Nosso produto: | Nosso aplicativo permite que os estudantes possam expressar suas dúvidas a qualquer momento e ajudarem um ao outro, sem exposição, em um ambiente gamificado para incentivá-los e tornar a experiência mais divertida. |
@@ -66,11 +67,11 @@ Como banco de dados foi decidido o uso do PostgreSQL devido ao amplo suporte par
 Foi escolhido utilizar o Docker visto que possui diversas imagens que irão facilitar durante o desenvolvimento, como a do postgreSQL que poderá ser usada junto ao DBeaver ao invés de armazenar um banco localmente durante o desenvolvimento. Além disso, irá garantir que a aplicação vá rodar da maneira esperada em diversas máquinas, sem haver problema de interoperacionalidade.
 
 #### **Ferramentas**
-
+- Visual Studio Code
 - GitHub
 - Git
 
-As ferramentas Git e Github foram escolhidas para que o código e documentos possam ser versionados e guardados dentro de um repositório, contam com um extenso material na internet, assim, facilitando com que todos os integrantes da equipe consigam aprender facilmente a utilizar. Além disso, o Git possui um histórico de versionamento, o que facilita recuperar trechos do código caso alguma funcionalidade seja implementada de forma indevida. O GitHub possui funcionalidades que contribuem com a organização da equipe, facilitando na atribuição e organização de tarefas.
+As ferramentas Git e Github foram escolhidas para que o código e documentos possam ser versionados e guardados dentro de um repositório, contam com um extenso material na internet, assim, facilitando com que todos os integrantes da equipe consigam aprender facilmente a utilizar. Além disso, o Git possui um histórico de versionamento, o que facilita recuperar trechos do código caso alguma funcionalidade seja implementada de forma indevida. O GitHub possui funcionalidades que contribuem com a organização da equipe, facilitando na atribuição e organização de tarefas. O editor de código utilizado para o desenvolvimento será o VS Code.
 
 #### **Métodos**  
 Os métodos de desenvolvimento escolhidos pela equipe foram o Scrum e o XP.
@@ -86,7 +87,7 @@ O XP será utilizado devido a ferramentas como o *pair programming*, visto que i
 #### **Arquitetura**  
 **Backend:**  
 
-- **Hexagonal:** No backend foi optado pelo uso da arquitetura hexagonal, pois assim, haverá uma forte divisão entre as camadas mais internas da aplicação com as mais externas, será aplicada uma forte inversão de dependência, visando uma maior organização e estruturação para o crescimento da plataforma a longo prazo, facilitando sua manutenção. A arquitetura hexagonal é baseada em portas, que são as partes da aplicação que irão receber requisições externas para envio de dados, e adaptadores, que funcionam como uma camada intermediária entre a camada de serviços da aplicação e serviços externos que serão utilizados na API.
+- **Hexagonal:** No backend foi optado pelo uso do padrão arquiteturas hexagonal, pois assim, haverá uma forte divisão entre as camadas mais internas da aplicação com as mais externas, será aplicada uma forte inversão de dependência, visando uma maior organização e estruturação para o crescimento da plataforma a longo prazo, facilitando sua manutenção. A arquitetura hexagonal é baseada em portas, que são as partes da aplicação que irão receber requisições externas para envio de dados, e adaptadores, que funcionam como uma camada intermediária entre a camada de serviços da aplicação e serviços externos que serão utilizados na API. 
 
 **Frontend:**
 
@@ -116,7 +117,7 @@ Tabela 2: Divisão de responsabilidades
 | Desenvolvedor front-end | Idealizar design do produto, codificar a interface, codificar testes unitários, realizar refatoração, gerar análise de usuários, construir Plano Geral da Gamificação, documentar | David William    | Arthur, David William, Giovana, Gustavo, João V. Farias, Yan, Letícia, |
 | Desenvolvedor back-end  | Modelar e codificar banco de dados, codificar testes unitários, realizar refatoração, documentar                                                                                  | David William    | David William, Gabriel, João V. Farias, Sophia                         |
 | Desenvolvedor devops    | Integrar back-end e front-end, codificar testes unitários, realizar refatoração, documentar, distribuir produto, manter infraestrutura através de monitoramento                   | David William    | David William, João V. Farias                                          |
-| Líder do Produto        | Junto aos times, atualizar o escopo do produto, organizar o escopo das sprints, validar as entregas                                                                               | David William    | Gabriel                                                                |
+| Líder do Produto        | Junto aos times, atualizar o escopo do produto, organizar o escopo das sprints, validar as entregas                                                                               | David William    | Gabriel, Sophia                                                                |
 | Cliente                 | Definir requisitos, fornecer feedback, priorizar funcionalidades, aprovar entregas, comunicar restrições, participar de reuniões                                                  | Wildemberg Sales |                                                                        |
 
 ### **Planejamento das Fases e/ou Iterações do Projeto**
@@ -126,7 +127,15 @@ Tabela 2: Divisão de responsabilidades
 | _Sprint_ | _Produto (Entrega)_     | _Data Início_ | _Data Fim_ | _Entregável(eis)_                               | _Responsáveis_   | _% conclusão_ |
 | -------- | ----------------------- | ------------- | ---------- | ----------------------------------------------- | ---------------- | ------------- |
 | 1        | Definição do Produto    | 08/11/24      | 22/11/24   | Documento de requisitos                         | Equipe e Cliente | 50%           |
-| 2        | Planejamento do Projeto | 23/11/24      | 06/12/24   | Documento de visão e Plano Geral da Gamificação | Equipe           | 50%           |
+| 2        | Planejamento do Projeto | 23/11/24      | 06/12/24   | Documento de visão e Plano Geral da Gamificação | Equipe           | 100%           |
+|3|Prototipação|03/12/24|18/12/24|Protótipo em Figma|Equipe Front-End||
+|4|Arquitetura|03/12/24|18/12/24|Documento de Arquitetura|Equipe Back-End e DevOps||
+|5|Cadastro e login de usuários|09/12/24|23/12/24|API de cadastro e login no aplicativo|Equipe Back-End e Front-End||
+|6|Dúvidas e fórum|04/01/25|18/01/25|Fórum e criação e possível de se responder dúvidas|Equipe Back-End e Front-End||
+|7|Chat entre perfis|14/01/25|29/01/25|Conversa entre usuários|Equipe Front-End e Back-End||
+|9|Sistema de avaliação|21/01/25|29/01/25|Implementação das avaliações entre aluno e tutor|Equipe Back-end||
+|10|Sistemas de gamificação|20/01/25|29/01/25|Notificações, ranqueamento, recompensas e temporada.|Equipe DevOps, Back-End e Front-End||
+
 
 ### **Matriz de Comunicação**
 
@@ -153,7 +162,7 @@ Tabela 2: Divisão de responsabilidades
 | Falhas na gamificação desmotivando os usuários, como mecânicas de pontuação mal calibradas.                             | Realizar testes com usuários para ajustar o equilíbrio de pontos e níveis antes do lançamento. | Atualizar os parâmetros de pontuação em tempo real e comunicar as mudanças aos usuários.                                                                           | Médio |
 | Desempenho inadequado do aplicativo em dispositivos mais antigos                                                        | Realizar testes de performance com diferentes configurações de hardware.                       | Desativar funcionalidades mais pesadas nesses dispositivos, priorizando a experiência básica.                                                                      | Médio |
 | Dificuldade na gestão de backlog no GitHub Projects, resultando em baixa rastreabilidade das tarefas.                   | Treinar o time para utilizar corretamente as ferramentas e revisar o backlog regularmente.     | Dar responsabilidade para um membro supervisionar as tarefas e padronizar templates para as issues.                                                                | Médio |
-
+|Curva de aprendizado do time|Identificar lacunas no aprendizado de todos e realizar pareamentos/aulas, pesquisas, leituras para que essas lacunas possam ser preenchidas|Identificar membros que tem mais conhecimento acumulado para compartilhar com o resto da equipe.|Alto|
 
 ### **Critérios de Replanejamento**
 
@@ -238,8 +247,15 @@ Tabela 6: Perfis de acesso
 | Sistema: Wunjo – Cenários funcionais |                 |         |
 | :--------------------------------: | :-------------: | :-----: |
 |        Numeração do cenário        | Nome do cenário | Sprints |
-|               1                    | Criação de conta|    1    |
-|               2                    | Postar dúvida   |    1    |
+|1º|Perfis funcionais|Sistema e cadastro de perfis|
+|2º|Dúvidas e fórum|Dúvidas e fórum|
+|3º|Sistema de chat|Chat entre perfis|
+|4º|Filtragem e categorização de dúvidas|Dúvidas e fórum|
+|5º|Denúncia e avaliação|Sistema de avaliação|
+|6º|Notificações em aparelho|Sistema de gamificação|
+|7º|Sistema de ranking|Sistemas de gamificação|
+|8º|Sistema de moedas|Sistemas de gamificação|
+|9º|Sistema de temporadas|Sistemas de gamificação|
 
 
 ### **Tabela de Backlog do produto**
