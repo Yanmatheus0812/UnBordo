@@ -1,23 +1,21 @@
-UnBordo - A aventura do conhecimento 
-=============
+# **UnBordo - A aventura do conhecimento** 
 
 
-Histórico de Revisão 
-|Data |Versão  |Descrição  |Autor(es)|
+**Histórico de Revisões**
+
+| Data           | Versão | Descrição                    | Autor                         |
 | :------------- | :----- | :--------------------------- | :---------------------------- |
-|18/12/2024      |0.1     |Primeira versão do documento  |David, Gabriel, João, Sophia e Willian|
-|                |        |                              |                               |
+| **18/12/2024** | 0.1    | Primeira versão do documento | David, Gabriel, João e Sophia |
+| **26/01/2025** | 0.2    | Ajustes | Sophia |
 
-1 Introdução 
-=============
 
-   1.1 Finalidade 
-------------------
+# **Introdução** 
+
+## **Finalidade**
 
 Este documento descreve a arquitetura do sistema sendo desenvolvido pelo grupo Wunjo, na disciplina de MDS -- Métodos de Desenvolvimento de Software -- edição do segundo semestre de 2024 <UnBordo - A aventura do conhecimento>, a fim de capturar e transmitir decisões arquiteturais tomadas durante o processo de desenvolvimento do sistema, fornecendo uma visão abrangente do sistema para desenvolvedores, testadores e demais interessados.
 
-    1.2 Escopo 
----------------
+## **Escopo**
 
 O detalhamento do escopo se encontra no documento <Documento de visão e produto de software - UnBordo>. 
 
@@ -25,23 +23,20 @@ Em linhas gerais, o escopo do produto se trata de uma aplicação mobile gamific
 
 Dentro da aplicação, esse estudante pode acessar o fórum de dúvidas, tanto para fazer uma pergunta, quanto para responder uma dúvida, sendo nesta última ele recebendo pontos, que, caso ele deseje participar, contam para sua posição no ranking da plataforma. O contato entre o estudante que perguntou e o que está respondendo ocorre por um chat privado.
 
-2 Representação Arquitetural 
-=============================
+# **Representação Arquitetural**
 
-2.1 Definições 
----------------
+
+## **Definições**
 
 O sistema seguirá, no back-end, o padrão arquitetural Hexagonal, utilizando portas e adaptadores, e, no front-end, a arquitetura Component-Based Architecture (CBA).
 
-2.2 Justifique sua escolha. 
-----------------------------
+## **Justificação**
 
 Um dos objetivos da aplicação é que ela seja escalável, pensando nisso, foi escolhida a hexagonal no back-end, que enfatiza a separação entre o núcleo da aplicação e suas dependências externas. Essa abordagem permite maior flexibilidade, manutenção, testabilidade e escalabilidade da aplicação, pois as camadas são desacopladas e conectadas por meio de portas e adaptadores.
 
 No front-end, a escolha se deu para aproveitar o comportamento do React, utilizando a CBA para criar componentes reutilizáveis, promovendo a qualidade de código, manutenção e testes de software.
 
-2.3 Detalhamento 
------------------
+## **Detalhamento** 
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeQgbiKLeNMK1m7_8K5YYrFgG6rYtFUI7DiD0jh6NKHEdvQk3XGFx7acKwks-AoXkr9GtLqPAsH0dWQ3OmtBVO6zg-6Qr34TjfHWJNqFmEBfvAuVFLAIKBqu1WnU5kgsbjgUX8VkA?key=9XqIJ4VXtzas9zVDhJnweE11)
 
@@ -56,8 +51,7 @@ Elementos de modelo:
 
 3.  Adaptadores de Entrada e Saída: Facilitam a interação entre o núcleo da aplicação e ferramentas externas como usuários, interfaces de programação de aplicação (APIs) e bancos de dados);
 
-2.4 Metas e restrições arquiteturais 
--------------------------------------
+## **Metas e restrições arquiteturais**
 
 O sistema além de lidar com dados como nome, matrícula e curso do usuário, deve implementar um chat 1:1 entre eles, sendo necessário a proteção da privacidade e dos dados pessoais. 
 
@@ -77,8 +71,7 @@ O sistema deve suportar uma alta quantidade de requisições, possuir uma rápid
 
 3.  Pensando na inter operacionalidade, será utilizado o Docker, que garantirá que a aplicação funcione de maneira esperada em diversos dispositivos.
 
-2.5 Visão de Casos de uso
--------------------------
+## **Visão de Casos de uso**
 
 1.  Cadastro de Usuários:
 
@@ -217,8 +210,7 @@ O sistema deve suportar uma alta quantidade de requisições, possuir uma rápid
 -   Cobertura Arquitetural: Explora a interação entre as portas de entrada e a camada de serviços.\
     Com base nessas principais funcionalidades, o grupo decidiu por usar a arquitetura Hexagonal, a fim de possuir uma maior estruturação do sistema pensando em sua escalabilidade ao longo do tempo.
 
-2.6 Visão lógica 
------------------
+## **Visão lógica** 
 
 ### Cadastro
 
@@ -328,8 +320,7 @@ Figura 3: Fluxo de cadastro de dúvidas o fórum
 
 Figura 4: Fluxo de chat e resposta de dúvidas
 
-2.7 Visão de Implementação 
----------------------------
+## **Visão de Implementação** 
 
 Banco de Dados: o Prisma ORM é utilizado para queries e sincronização das entidades com o PostgreSQL.
 
@@ -393,8 +384,7 @@ Camada de Infraestrutura
 
 Figura 5: Camada de Infraestrutura
 
-2.8 Visão de Implantação 
--------------------------
+## **Visão de Implantação**
 
 O software será implantado em dispositivos móveis, onde os ambientes operacionais estão organizados em cliente, servidor de aplicativo e banco de dados. O cliente consiste no sistema operacional a ser utilizado no aparelho do usuário, em que pode ser tanto o Android quanto o iOS, pois são os mais utilizados pelas fabricantes de smartphones e tablets. Outrossim, o servidor de aplicação engloba a parte que será utilizada para a execução do código da aplicação e interação com outros componentes de software, como sistemas de mensagens e a conexão com o banco de dados. Sendo assim, para o funcionamento e interação entre esses ambientes, serão utilizadas as seguintes tecnologias:
 
@@ -412,8 +402,7 @@ O software será implantado em dispositivos móveis, onde os ambientes operacion
 
 Assim como o banco de dados PostgreSQL, pois além de ser uma ferramenta open-source, ele consegue fornecer um alto desempenho para as operações de manipulação de dados, recurso de autenticação e autorização robusta aos usuários, e uma boa integração com as outras tecnologias que serão utilizadas no projeto.
 
-2.9 Restrições adicionais
--------------------------
+## **Restrições adicionais**
 
 O Prisma ORM, contendo o banco de dados, PostgreSQL, estará conectado em um sistema próprio e seguro, onde o acesso será restrito aos membros do time, e eles poderão modificar, e analisar como o banco está rodando. O licenciamento será MIT, permitindo que o software possa ser contribuído de diversas fontes diferentes ao redor do mundo, e seu código-fonte será livre para acesso no [repositório](https://github.com/FGA0138-MDS-Ajax/2024.2-Wunjo). As senhas no banco serão armazenadas criptografadas, para que nem membros do time possam vê-las em seu formato original. Tal banco possuirá módulos seguindo a arquitetura Hexagonal, com um dos módulos de Supabase e suas funcionalidades de dados em tempo real para a base direta do chat no aplicativo.
 
@@ -423,8 +412,7 @@ A usabilidade é vital em muitos aspectos de funcionalidade; Como para gamifica�
 
 Uma característica extremamente importante para uma boa construção de nosso projeto é o de confiabilidade: com os alunos tendo segurança em suas conversas privadas com os tutores, e tendo o poder de reportá-los por mal comportamento; isso é importante, pois os usos estão diretamente ligados com o quanto o aluno e tutor tem confiança na eficaz do aplicativo.
 
-3 Bibliografia 
-===============
+## **3 Bibliografia** 
 
 Documento de Visão - UnBordo. 02 dez. 2024. Grupo 6 - Wunjo. Disponível em: [Documento de Visão](https://fga0138-mds-ajax.github.io/2024.2-Wunjo/documento-visao/documento-visao/).
 
