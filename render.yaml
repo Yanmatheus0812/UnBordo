@@ -1,0 +1,47 @@
+services:
+  - type: redis
+    name: wunjoredis
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+
+  - type: web
+    name: wunjobackend
+    env: node
+    branch: feat/app-integration
+    repo: https://github.com/FGA0138-MDS-Ajax/2024.2-Wunjo
+    buildCommand: npm install
+    startCommand: npm run prod
+    envVars:
+      - key: NODE_ENV
+        sync: false
+      - key: PORT
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: JWT_TOKEN_EXPIRATION
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          name: wunjoredis
+          type: redis
+          property: connectionString
+      - key: GMAIL_AUTH_USER
+        sync: false
+      - key: GMAIL_AUTH_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+
+    routes:
+    rootDir: backend
+    buildFilter:
+      paths: 
+        - src/**
+
+    plan: free
+    healthCheckPath: /health
