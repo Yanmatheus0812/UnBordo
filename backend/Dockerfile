@@ -25,5 +25,4 @@ RUN rm -rf /app/node_modules
 RUN npm install
 RUN npm run prisma generate
 
-CMD ["node", "build/server.js"]
 EXPOSE 3000
