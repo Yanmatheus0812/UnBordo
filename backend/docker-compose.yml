@@ -1,18 +1,18 @@
 
 services:
-  postgres:
-    container_name: wunjo.backend.pg
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: wnjo-backend
-    volumes:
-      - wunjo-db:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - wunjo_network
+  #postgres:
+  #  container_name: wunjo.backend.pg
+  #  image: postgres
+  #  environment:
+  #    POSTGRES_PASSWORD: postgres
+  #    POSTGRES_USER: postgres
+  #    POSTGRES_DB: wnjo-backend
+  #  volumes:
+  #    - wunjo-db:/var/lib/postgresql/data
+  #  ports:
+  #    - "5432:5432"
+  #  networks:
+  #    - wunjo_network
   redis:
     container_name: wunjo.account.redis
     image: redis:7.2.4
@@ -33,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
+      #- postgres
       - redis
     volumes:
       - ".:/usr/app"
@@ -46,6 +46,6 @@ networks:
     driver: bridge
 
 volumes:
-  wunjo-db:
+  #wunjo-db:
   cache:
     driver: local
