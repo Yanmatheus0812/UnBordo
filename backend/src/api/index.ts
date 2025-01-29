@@ -9,10 +9,10 @@ import route from './routes';
 
 const api = express();
 
-api.use(cors({ origin: '*' }));
+api.use(cors({ origin: '*', credentials: true }));
 api.use(helmet());
-api.use(express.json());
-api.use(express.urlencoded({ extended: true }));
+api.use(express.json({ limit: '10mb' }));
+api.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 api.use(route);
 
