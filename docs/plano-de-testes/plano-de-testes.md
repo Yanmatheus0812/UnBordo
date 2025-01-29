@@ -53,13 +53,10 @@ Esta seção deve conter os tipos de testes escolhidos para cada iteração do p
 Pode-se definir inicialmente apenas os tipos de testes que serão usadas na próxima iteração, mas é possível também já registrar eventuais tipos de teste que se espera utilizar nas demais iterações. 
 Com base no guia de testes, indique os tipos de testes que melhor se adéquam aos requisitos, tipo da aplicação e seus recursos disponíveis e, caso necessário complemente ou forneça mais detalhes da técnica e dos critérios de completude sugeridos no guia para cada tipo de teste indicado.
 
-- Teste de interface de usuário;
-- Teste de performance;
 - Teste de carga;
-- Teste de stress;
 - Teste de segurança e controle de acesso;
 - Teste de instalação;
-- Entre outros.
+- Teste de sistema;
 
 ### 3.1 - Métodos da Classe 
 
