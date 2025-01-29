@@ -1,4 +1,4 @@
-FROM node:20-alpine as builder
+FROM node:22-alpine as builder
 
 WORKDIR /app
 
@@ -6,22 +6,24 @@ COPY . .
 
 ENV NODE_ENV=prod
 
-RUN apk add --no-cache make pkgconfig build-base
+RUN apk add --no-cache make pkgconfig build-base openssl nodejs npm
 
-RUN npm install --omit=dev
+RUN npm install
 
-RUN npm run build
-
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
-RUN npm install -g npm@10.4.0
+ENV NODE_ENV=prod
 
-COPY --from=builder /app/build /app/build
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/package.json /app/package.json
+RUN apk add openssl nodejs npm make pkgconfig build-base
 
-ENV NODE_ENV=production
+COPY --from=builder /app /app/
+
+RUN rm -rf /app/node_modules
+
+RUN npm install
+RUN npm run prisma generate
 
 CMD ["node", "build/server.js"]
+EXPOSE 3000

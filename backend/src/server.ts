@@ -8,10 +8,22 @@ import { prisma } from './infra/orm/prisma/datasource';
 import { BullMQ } from './messsaging/bullmq';
 
 export function apiProvider() {
-  http.createServer(api).listen(env.PORT, () => {
+
+  http.createServer(api).listen(env.PORT, '0.0.0.0', () => {
     logger.info(`Server is running on port ${env.PORT}`);
   });
 }
+
+
+// Global error handlers
+process.on('uncaughtException', (error) => {
+  logger.error(error.message, `Uncaught Exception: `, 'MSG');
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(reason, `Unhandled Rejection at: ${promise}`, 'MSG');
+});
 
 export function databaseProvider() {
   logger.info('Connecting with database');
