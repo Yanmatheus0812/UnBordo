@@ -8,7 +8,7 @@
     "schema": "src/infra/orm/prisma/schema.prisma"
   },
   "scripts": {
-    "prod": "tsx watch --env-file=./env/.env ./src/server.ts",
+    "prod": "tsx ./src/server.ts",
     "local": "tsx watch --env-file=./env/.env.local ./src/server.ts",
     "dev": "tsx watch --env-file=./env/.env.dev ./src/server.ts",
     "lint": "tsc --noEmit && eslint . --no-error-on-unmatched-pattern",
