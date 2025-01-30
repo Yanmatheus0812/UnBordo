@@ -26,3 +26,4 @@ RUN npm install
 RUN npm run prisma generate
 
 EXPOSE 3000
+CMD ["npm", "exec", "tsx", "./src/server.ts"]
