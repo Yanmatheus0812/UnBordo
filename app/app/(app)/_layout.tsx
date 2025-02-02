@@ -1,16 +1,13 @@
-import { Redirect, Tabs, useRouter } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
 import HomeIcon from '@/assets/images/HomeIcon';
 import ChatIcon from '@/assets/images/ChatIcon';
 import AwardIcon from '@/assets/images/AwardIcon';
 import ProfileIcon from '@/assets/images/ProfileIcon';
-import { TabBar } from '@/components/ui/tabBar';
 
 const tabBarItemStyle = {
   paddingTop: 4,

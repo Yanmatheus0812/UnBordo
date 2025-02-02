@@ -9,6 +9,7 @@ import {
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { Input } from '@/components/ui/input2';
 import SVGArrowDown from '@/assets/images/arrow-down';
+import { Box } from '../box';
 
 export function Select({
   label,
@@ -45,13 +46,14 @@ export function Select({
         placeholder={placeholder}
         value={value}
       >
-        <SVGArrowDown
-          size={25}
-          style={{
-            position: 'absolute',
-            right: '5%',
-          }}
-        />
+        <Box className="bg-white absolute right-0 h-full items-center justify-center rounded-lg">
+          <SVGArrowDown
+            size={25}
+            style={{
+              marginRight: '5%',
+            }}
+          />
+        </Box>
       </Input>
       <GestureRecognizer onSwipeDown={() => setModalVisible(false)}>
         <Modal

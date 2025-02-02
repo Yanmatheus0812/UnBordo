@@ -1,5 +1,7 @@
 import {
   AuthUsecase,
+  ChangePasswordUsecase,
+  ConfirmForgotPasswordCodeUsecase,
   CreateQuestionUsecase,
   DeleteQuestionUsecase,
   GetAllQuestionsUsecase,
@@ -8,16 +10,20 @@ import {
   LoginUsecase,
   RegisterConfirmUsecase,
   RegisterUsecase,
+  RequestForgotPasswordCodeUsecase,
   SendEmailUsecase,
 } from '@/application/usecases';
 import {
+  ChangePasswordUsecaseZodValidator,
+  ConfirmForgotPasswordCodeUsecaseZodValidator,
   ForumCreateQuestionUsecaseZodValidator,
   ForumDeleteQuestionUsecaseZodValidator,
+  ForumGetAllQuestionsUsecaseZodValidator,
   ForumGetQuestionUsecaseZodValidator,
   LoginUsecaseZodValidator,
   RegisterUsecaseZodValidator,
+  RequestForgotPasswordCodeUsecaseZodValidator,
 } from '@/infra/services/shared/zod';
-import { ForumGetAllQuestionsUsecaseZodValidator } from '@/infra/services/shared/zod/forum/forum-get-all-questions-usecase-zod-validator';
 import { InfraDI } from '../infra';
 
 export function configureApplicationUsecaseDI(container: InfraDI) {
@@ -103,7 +109,41 @@ export function configureApplicationUsecaseDI(container: InfraDI) {
           new ForumGetAllQuestionsUsecaseZodValidator(),
         ),
     )
-    .add(GetAllSubjectsUsecase.Name, () => new GetAllSubjectsUsecase());
+    .add(GetAllSubjectsUsecase.Name, () => new GetAllSubjectsUsecase())
+    .add(
+      RequestForgotPasswordCodeUsecase.Name,
+      ({ StudentRepository, DispatchEmailService, EmailRepository }) =>
+        new RequestForgotPasswordCodeUsecase(
+          new RequestForgotPasswordCodeUsecaseZodValidator(),
+          StudentRepository,
+          DispatchEmailService,
+          EmailRepository,
+        ),
+    )
+    .add(
+      ConfirmForgotPasswordCodeUsecase.Name,
+      ({ StudentRepository, EmailRepository, PasswordRecoveryRepository }) =>
+        new ConfirmForgotPasswordCodeUsecase(
+          new ConfirmForgotPasswordCodeUsecaseZodValidator(),
+          StudentRepository,
+          EmailRepository,
+          PasswordRecoveryRepository,
+        ),
+    )
+    .add(
+      ChangePasswordUsecase.Name,
+      ({
+        StudentRepository,
+        PasswordHash,
+        PasswordRecoveryRepository,
+      }) =>
+        new ChangePasswordUsecase(
+          new ChangePasswordUsecaseZodValidator(),
+          StudentRepository,
+          PasswordHash,
+          PasswordRecoveryRepository,
+        ),
+    );
 }
 
 export type ApplicationUsecaseDI = ReturnType<

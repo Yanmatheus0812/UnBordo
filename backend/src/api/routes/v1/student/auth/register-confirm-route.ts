@@ -10,10 +10,5 @@ export default async function (req: Request, res: Response) {
     code: req.params.code,
   });
 
-  const message = {
-    true: 'Conta confirmada com sucesso',
-    false: 'Código inválido',
-  };
-
-  res.status(200).send(message[output as unknown as keyof typeof message]);
+  res.status(200).send(output.message);
 }

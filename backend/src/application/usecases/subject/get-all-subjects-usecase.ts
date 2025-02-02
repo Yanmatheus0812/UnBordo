@@ -16,7 +16,14 @@ export class GetAllSubjectsUsecase {
         return allowedSearchFields.some((field) => {
           return String(subject[field as keyof typeof subject])
             .toLowerCase()
-            .includes(params.search!.toLowerCase());
+            .normalize('NFD')
+            .replace(/[\u0300-\u036F]/g, '')
+            .includes(
+              params
+                .search!.normalize('NFD')
+                .replace(/[\u0300-\u036F]/g, '')
+                .toLowerCase(),
+            );
         });
       });
     }

@@ -6,3 +6,4 @@ export * from './Question';
 export * from './Season';
 export * from './Student';
 export * from './Subject';
+export * from './PasswordRecoveryCode';

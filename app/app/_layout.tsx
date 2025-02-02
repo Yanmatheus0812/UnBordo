@@ -1,6 +1,5 @@
 import '@/global.css';
 import '@/helpers/zod-mapper';
-// import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
