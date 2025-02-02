@@ -64,8 +64,6 @@ export const useRegister = () => {
           router.push('/(register)/(complete)');
         },
         onError: (error: any) => {
-          console.log(JSON.stringify(error?.response?.data, null, 2));
-
           switch (error?.response?.data?.type) {
             case 'AlreadyExistsError':
               form.setError('root', {

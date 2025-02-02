@@ -31,7 +31,7 @@ export class SendEmailUsecase {
     const template = await this.getTemplate(input.type);
 
     if (!template) {
-      throw new NotFoundError('Email template not working.', 'EMAIL_TEMPLATE');
+      throw new NotFoundError('Email template not found.', 'EMAIL_TEMPLATE');
     }
 
     await this.providerEmailServiceFacade.send({

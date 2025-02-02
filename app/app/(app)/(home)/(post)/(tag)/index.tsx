@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Template } from '@/app/(app)/(home)/(filter)';
+import React, { useCallback, useEffect, useState } from 'react';
 import TreasureChest from '@/assets/images/Treasure-chest';
 import { useRouter } from 'expo-router';
 import { usePostQuestion } from '../post';
 import SafeAreaView from '@/components/SafeAreaView';
 import { BackHeader } from '@/components/ui/backheader';
 import { Text } from '@/components/ui/text';
-import { Keyboard, Pressable, View } from 'react-native';
+import { FlatList, Keyboard, Pressable, ScrollView, View } from 'react-native';
 import { FormErrorMessage } from '@/components/ui/FormErrorMessage';
 import { Input } from '@/components/ui/input2';
 import { Select } from '@/components/ui/select';
@@ -20,11 +19,20 @@ import {
   QuestionUrgencies,
   QuestionUrgencyLabels,
 } from '@/interfaces/application';
+import { getAllSubjects } from '@/http/services/subject';
+import { Box } from '@/components/ui/box';
+import colors from 'tailwindcss/colors';
+import debounce from 'lodash.debounce';
 
 export default function Screen() {
   const router = useRouter();
   const [dificultyVisible, setDificultyVisible] = useState(false);
   const [urgencyVisible, setUrgencyVisible] = useState(false);
+  const [subjectsVisible, setSubjectsVisible] = useState(false);
+  const [subjects, setSetSubjects] = useState<
+    Array<{ id: string; code: string; name: string }>
+  >([]);
+  const [inputSearch, setInputSearch] = useState<string>('');
 
   const {
     form: {
@@ -38,12 +46,27 @@ export default function Screen() {
 
   const keyboardIsOpen = useKeyboardVisible();
 
+  async function pegarDados(search: string) {
+    try {
+      const response = await getAllSubjects({
+        search: search,
+      });
+
+      setSetSubjects(response.data.subjects);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const requestData = useCallback(debounce(pegarDados, 500), []);
+  useEffect(() => {
+    requestData(inputSearch);
+  }, [inputSearch]);
+
   return (
     <SafeAreaView
       style={{
-        // flex: 1,
         height: '100%',
-        // alignItems: 'center',
       }}
     >
       <Layout className="items-center h-full">
@@ -107,12 +130,64 @@ export default function Screen() {
               control={control}
               name="subjectId"
               render={({ field: { onChange, value } }) => (
-                <Input
+                <Select
                   label="Sua dúvida pertence a qual disciplina?"
-                  placeholder="Digite aqui.."
-                  value={value}
-                  onChangeText={onChange}
-                />
+                  modalVisible={subjectsVisible}
+                  setModalVisible={setSubjectsVisible}
+                  placeholder="Selecione..."
+                  value={
+                    (subjects.find((item: any) => item.id === value) as any)
+                      ?.name
+                  }
+                >
+                  <Box className="mx-4 mb-4">
+                    <Input
+                      placeholder="Pesquise aqui..."
+                      style={{
+                        backgroundColor: colors.gray[100],
+                      }}
+                      value={inputSearch}
+                      onChangeText={setInputSearch}
+                    />
+                  </Box>
+
+                  <FlatList
+                    data={subjects}
+                    renderItem={({ item }) => (
+                      <Pressable
+                        key={item.id}
+                        onPress={() => {
+                          onChange(item.id);
+                          setSubjectsVisible(false);
+                        }}
+                        style={{
+                          height: 48,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          paddingLeft: 16,
+                          backgroundColor:
+                            (value === item.id && '#F0F0F0') || 'white',
+                        }}
+                      >
+                        <Text
+                          className="font-raleway"
+                          style={{
+                            color: 'black',
+                            fontSize: 15,
+                          }}
+                        >
+                          {item.code} - {item.name}
+                        </Text>
+                      </Pressable>
+                    )}
+                  />
+                </Select>
+                // <Input
+                //   label="Sua dúvida pertence a qual disciplina?"
+                //   placeholder="Digite aqui.."
+                //   value={value}
+                //   onChangeText={onChange}
+                // />
               )}
             />
             <FormErrorMessage errors={errors} path="subjectId" />

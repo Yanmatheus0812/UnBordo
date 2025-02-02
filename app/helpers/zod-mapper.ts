@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
 const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
-  console.log(issue);
-
   if (issue.code === z.ZodIssueCode.invalid_type) {
     if (['string', 'boolean'].includes(issue.expected)) {
       return { message: 'Campo obrigatório' };

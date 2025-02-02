@@ -21,7 +21,9 @@ export class RegisterConfirmUsecase {
     });
 
     if (!studentExists) {
-      return false;
+      return {
+        message: 'Código inválido',
+      };
     }
 
     const cacheData = await this.emailRepository.get({
@@ -30,7 +32,9 @@ export class RegisterConfirmUsecase {
     });
 
     if (!cacheData) {
-      return false;
+      return {
+        message: 'Seu registro já foi confirmado ou seu código expirou',
+      };
     }
 
     const parsedData = JSON.parse(cacheData.data) as {
@@ -38,7 +42,9 @@ export class RegisterConfirmUsecase {
     };
 
     if (parsedData.code !== input.code) {
-      return false;
+      return {
+        message: 'Código inválido',
+      };
     }
 
     await Promise.all([
@@ -52,7 +58,9 @@ export class RegisterConfirmUsecase {
       }),
     ]);
 
-    return true;
+    return {
+      message: 'Registro confirmado com sucesso',
+    };
   }
 }
 
@@ -61,5 +69,7 @@ export namespace RegisterConfirmUsecase {
     code: string;
   };
 
-  export type Output = boolean;
+  export type Output = {
+    message: string;
+  };
 }

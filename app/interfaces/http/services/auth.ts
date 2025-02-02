@@ -32,4 +32,35 @@ export namespace IAuthService {
   export namespace Me {
     export type Response = { student: Omit<IStudent, 'password'> };
   }
+
+  export namespace RequestRecoveryPasswordCode {
+    export type Request = {
+      registration: string;
+    };
+
+    export type Response = {};
+  }
+
+  export namespace ConfirmRecoveryCode {
+    export type Request = {
+      registration: string;
+      code: string;
+    };
+
+    export type Response = {
+      studentId: string;
+      time: string;
+    };
+  }
+
+  export namespace ChangePassword {
+    export type Request = {
+      studentId: string;
+      code: string;
+      password: string;
+      confirmPassword: string;
+    };
+
+    export type Response = {};
+  }
 }

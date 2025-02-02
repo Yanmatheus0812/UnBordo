@@ -1,8 +1,14 @@
-import * as React from "react"
-import { StyleProp, ViewStyle } from "react-native"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 
-function SvgComponent({size, style}: {size: number, style?: StyleProp<ViewStyle>}) {
+function SvgComponent({
+  size,
+  style,
+}: {
+  size: number;
+  style?: StyleProp<ViewStyle>;
+}) {
   return (
     <Svg
       width={size - 1}
@@ -19,7 +25,7 @@ function SvgComponent({size, style}: {size: number, style?: StyleProp<ViewStyle>
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default SvgComponent
+export default SvgComponent;
