@@ -20,6 +20,7 @@ export class GetAllQuestionsUsecase {
       difficulty: validatedInput.filter.difficulty,
       include: {
         student: true,
+        subject: true,
       },
     });
 

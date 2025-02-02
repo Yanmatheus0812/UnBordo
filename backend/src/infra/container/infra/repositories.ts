@@ -1,4 +1,5 @@
 import {
+  ChatRoomRepository,
   EmailRepository,
   EmailTemplateRepository,
   PasswordRecoveryRepository,
@@ -12,6 +13,7 @@ import {
 } from '@/infra/cache/repositories';
 import { prisma } from '@/infra/orm/prisma/datasource';
 import {
+  ChatRoomPrismaRepository,
   EmailTemplatePrismaRepository,
   QuestionPrismaRepository,
   StudentPrismaRepository,
@@ -44,6 +46,10 @@ export function configureInfraRepositoryDI() {
     .add(
       PasswordRecoveryRepository.Name,
       ({ redisCache }) => new PasswordRecoveryCacheRepository(redisCache),
+    )
+    .add(
+      ChatRoomRepository.Name,
+      ({ pgDataSource }) => new ChatRoomPrismaRepository(pgDataSource),
     );
 }
 

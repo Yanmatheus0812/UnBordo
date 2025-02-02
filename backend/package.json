@@ -15,6 +15,7 @@
     "lint:fix": "npm run lint -- --fix",
     "redis:reset": "redis-cli FLUSHDB",
     "prisma": "dotenv -e ./env/.env -- npx prisma generate",
+    "prisma:local": "dotenv -e ./env/.env.local -- npx prisma",
     "prisma:reset": "dotenv -e ./env/.env -- npx prisma migrate reset",
     "test": "dotenv -e ./env/.env.test -- vitest",
     "test:ci": "export $(cat ./env/.env.test | xargs) && vitest",

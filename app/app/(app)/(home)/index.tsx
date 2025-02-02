@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import {
   View,
-  Text,
   TextInput,
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Modal,
   Pressable,
   Dimensions,
   SafeAreaView,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
+import {
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalContent,
+} from '@/components/ui/modal';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import UnbLogo_Home from '@/assets/images/UnbLogo_Home';
 import { Input } from '@/components/ui/input';
@@ -21,124 +26,26 @@ import Balloon from '@/assets/images/Balloon';
 import HelmIcon from '@/assets/images/HelmIcon';
 import WoodButton from '@/assets/images/WoodButton';
 import { useRouter } from 'expo-router';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { QuestionService } from '@/http/services/question';
-import { QuestionDificultyLabels } from '@/interfaces/application';
+import {
+  QuestionDificultyLabels,
+  QuestionStatuses,
+  QuestionUrgencies,
+} from '@/interfaces/application';
 import { IQuestionService } from '@/interfaces/http';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Box } from '@/components/ui/box';
 import { useUnBordo } from '@/hooks/unbordo';
+import { Text } from '@/components/ui/text';
+import { useDisclose } from '@/hooks/use-disclose';
+import { queryClient } from '@/hooks/react-query';
 
 const ForumHome = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [expandedText, setExpandedText] = useState<string | null>(null); // Armazena o ID do item expandido
-  const { auth } = useUnBordo();
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
-  const handleOptionClick = (option: string) => {
-    console.log(`Opção selecionada: ${option}`);
-    setModalVisible(false);
-  };
-
-  const handleReadMore = (id: string) => {
-    setExpandedText(id);
-  };
-
-  const handleShowLess = () => {
-    setExpandedText(null);
-  };
-
   const query = useQuery({
     queryKey: ['forum', 'posts'],
     queryFn: QuestionService.fetch,
   });
-
-  const renderCard = ({
-    item,
-  }: {
-    item: IQuestionService.Fetch.Response['questions'][0];
-  }) => {
-    const isExpanded = expandedText === item.id;
-
-    return (
-      <View style={styles.card}>
-        <View style={styles.cardHeader}>
-          <FontAwesome name="user-circle" size={40} color="#173CAC" />
-          <View
-            style={{
-              marginLeft: 10,
-              //backgroundColor: "red",
-              // minWidth: '90%',
-              // maxWidth: '100%',
-            }}
-          >
-            <Text style={styles.registration}>{item.student.registration}</Text>
-            <Text style={styles.subject}>{item.subjectId}</Text>
-          </View>
-
-          <View
-            style={{
-              marginLeft: 'auto',
-              flexDirection: 'row',
-              alignItems: 'center',
-              columnGap: 15,
-            }}
-          >
-            {item.urgency === 'HIGH' && (
-              <View style={styles.urgentTag}>
-                <Text style={styles.urgentText}>Urgente</Text>
-              </View>
-            )}
-            {auth.student.id !== item.student.id && (
-              <>
-                <Balloon />
-
-                <TouchableOpacity onPress={toggleModal}>
-                  <MaterialIcons
-                    name="more-vert"
-                    size={24}
-                    color="#000"
-                    style={styles.icon}
-                  />
-                </TouchableOpacity>
-              </>
-            )}
-          </View>
-        </View>
-        <Text style={styles.text} numberOfLines={isExpanded ? undefined : 3}>
-          {item.title}
-          {'\n'}
-          {item.description}
-        </Text>
-        {(item.description.length > 100 ||
-          item.description.split('\n').length > 3) &&
-          (!isExpanded ? (
-            <TouchableOpacity onPress={() => handleReadMore(item.id)}>
-              <Text style={styles.readMore}>Ler mais...</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={handleShowLess}>
-              <Text style={styles.readMore}>Mostrar menos</Text>
-            </TouchableOpacity>
-          ))}
-        <Box className="flex flex-row items-center justify-between mt-4">
-          {auth.student.id === item.student.id && (
-            <Text className="font-itim text-gray-500 font-xs">
-              Você postou essa dúvida
-            </Text>
-          )}
-
-          <Text style={styles.difficulty}>
-            {item.points} pontos |
-            Dificuldade: {QuestionDificultyLabels[item.difficulty]}
-          </Text>
-        </Box>
-      </View>
-    );
-  };
 
   const router = useRouter();
 
@@ -173,9 +80,9 @@ const ForumHome = () => {
       </View>
 
       <FlatList<IQuestionService.Fetch.Response['questions'][0]>
-        data={query.data?.data?.questions || []}
+        data={query.data?.data?.questions.filter((q) => q.status === QuestionStatuses.OPEN) || []}
         keyExtractor={(item) => item.id}
-        renderItem={renderCard}
+        renderItem={({ item }) => <CardItem item={item} />}
         ListEmptyComponent={() =>
           query.isFetching ? (
             <Box className="min-w-full flex flex-col gap-2 ">
@@ -247,31 +154,154 @@ const ForumHome = () => {
           }}
         />
       </TouchableOpacity>
+    </SafeAreaView>
+  );
+};
 
-      <Modal
-        visible={modalVisible}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={toggleModal}
-      >
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContent}>
-            <Text
-              style={styles.modalOption}
-              onPress={() => handleOptionClick('Opção 1')}
-            >
-              Responder
-            </Text>
-            <Text
-              style={styles.modalOption}
-              onPress={() => handleOptionClick('Opção 2')}
-            >
-              Denunciar
-            </Text>
+const CardItem = ({
+  item,
+}: {
+  item: IQuestionService.Fetch.Response['questions'][0];
+}) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const { auth } = useUnBordo();
+
+  const router = useRouter();
+
+  const {
+    isOpen: modalOpen,
+    onClose: onModalClose,
+    onOpen: onOpenModal,
+  } = useDisclose();
+  const { isOpen: isExpanded, onToggle: handleExpand } = useDisclose();
+
+  const replyChatMutation = useMutation({
+    mutationFn: QuestionService.reply,
+  });
+
+  const handleReply = () => {
+    replyChatMutation.mutate(
+      { questionId: item.id },
+      {
+        onSuccess: () => {
+          onModalClose();
+          queryClient.invalidateQueries({
+            queryKey: ['forum', 'posts'],
+          });
+          router.push('/(app)/(chat)');
+        },
+        onError: (err: any) => {
+          console.log(JSON.stringify(err.response, null, 2));
+          setError(err.response.data.message);
+        },
+      },
+    );
+  };
+
+  return (
+    <>
+      <View style={styles.card}>
+        <View style={styles.cardHeader}>
+          <FontAwesome name="user-circle" size={40} color="#173CAC" />
+          <View
+            style={{
+              marginLeft: 10,
+            }}
+          >
+            <Text style={styles.registration}>{item.student.registration}</Text>
+            <Text style={styles.subject}>{item.subject.name}</Text>
+          </View>
+
+          <View
+            style={{
+              marginLeft: 'auto',
+              flexDirection: 'row',
+              alignItems: 'center',
+              columnGap: 15,
+            }}
+          >
+            {item.urgency === QuestionUrgencies.HIGH && (
+              <View style={styles.urgentTag}>
+                <Text style={styles.urgentText}>Urgente</Text>
+              </View>
+            )}
+            {auth.student.id !== item.student.id && (
+              <>
+                <Balloon />
+
+                <TouchableOpacity onPress={onOpenModal}>
+                  <MaterialIcons
+                    name="more-vert"
+                    size={24}
+                    color="#000"
+                    style={styles.icon}
+                  />
+                </TouchableOpacity>
+              </>
+            )}
           </View>
         </View>
+        <Text style={styles.text} numberOfLines={isExpanded ? undefined : 3}>
+          {item.title}
+          {'\n'}
+          {item.description}
+        </Text>
+        {(item.description.length > 100 ||
+          item.description.split('\n').length > 3) &&
+          (!isExpanded ? (
+            <TouchableOpacity onPress={handleExpand}>
+              <Text style={styles.readMore}>Ler mais...</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={handleExpand}>
+              <Text style={styles.readMore}>Mostrar menos</Text>
+            </TouchableOpacity>
+          ))}
+        <Box className="flex flex-row items-center justify-between mt-4">
+          {auth.student.id === item.student.id && (
+            <Text className="font-itim text-gray-500 font-xs">
+              Você postou essa dúvida
+            </Text>
+          )}
+
+          <Text style={styles.difficulty}>
+            {item.points} pontos | Dificuldade:{' '}
+            {QuestionDificultyLabels[item.difficulty]}
+          </Text>
+        </Box>
+      </View>
+      <Modal isOpen={modalOpen} onClose={onModalClose} closeOnOverlayClick>
+        <ModalBackdrop />
+        <ModalContent className="bg-white py-2">
+          <ModalBody>
+            <Box>
+              {error && <Text className="text-red-400">{error}</Text>}
+              <TouchableOpacity
+                className="w-full p-4 items-center"
+                onPress={() => handleReply()}
+              >
+                {replyChatMutation.isPending ? (
+                  <ActivityIndicator size="small" color="#000" />
+                ) : (
+                  <Text size="lg" className="font-raleway-bold">
+                    Responder
+                  </Text>
+                )}
+              </TouchableOpacity>
+              <Box className="w-full h-px bg-gray-300" />
+              <TouchableOpacity
+                className="w-full p-4 items-center"
+              >
+                <Text size="lg" className="font-raleway-bold">
+                  Denunciar
+                </Text>
+              </TouchableOpacity>
+            </Box>
+          </ModalBody>
+        </ModalContent>
       </Modal>
-    </SafeAreaView>
+    </>
   );
 };
 

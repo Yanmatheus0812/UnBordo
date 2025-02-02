@@ -1,7 +1,7 @@
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -53,11 +53,12 @@ model Student {
   avatarUrl          String
   rankingParticipant Boolean
   password           String
-  createdAt          DateTime
-  updatedAt          DateTime
   seasons            SeasonStudent[]
   questions          Question[]
   chatMessages       ChatMessages[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("students")
 }
@@ -94,6 +95,9 @@ model Question {
   tutors      Json[]
   student     Student            @relation(fields: [studentId], references: [id])
   chatRooms   ChatRooms[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("questions")
 }
@@ -137,8 +141,8 @@ model ChatRooms {
   messages ChatMessages[]
   question Question       @relation(fields: [questionId], references: [id])
 
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("chat_rooms")
 }
