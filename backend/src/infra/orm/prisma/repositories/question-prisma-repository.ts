@@ -1,6 +1,7 @@
 import { QuestionRepository } from '@/application/repositories';
 import { Question } from '@/domain';
 import { PrismaClient } from '@prisma/client';
+import Subjects from '../../../../../public/subjects_formated.json';
 
 export class QuestionPrismaRepository implements QuestionRepository {
   constructor(private readonly prisma: PrismaClient) {}
@@ -34,10 +35,34 @@ export class QuestionPrismaRepository implements QuestionRepository {
   }
 
   async update(
-    _id: string,
-    _params: QuestionRepository.Update.Input,
+    id: string,
+    params: QuestionRepository.Update.Input,
   ): Promise<QuestionRepository.Update.Output> {
-    throw new Error('Not implemented');
+    const question = await this.prisma.question.update({
+      where: {
+        id,
+      },
+      data: {
+        subjectId: params.subjectId,
+        title: params.title,
+        description: params.description,
+        points: params.points,
+        status: params.status,
+        difficulty: params.difficulty,
+        urgency: params.urgency,
+        tutorId: params.tutorId,
+        studentId: params.studentId,
+      },
+    });
+
+    return {
+      ...question,
+      tutors: question.tutors.map((tutor: any) => ({
+        avaliation: tutor.avaliation,
+        chatRoomId: tutor.chatRoomId,
+        id: tutor.id,
+      })),
+    };
   }
 
   async findBy(
@@ -52,11 +77,15 @@ export class QuestionPrismaRepository implements QuestionRepository {
         urgency: params.urgency,
         difficulty: params.difficulty,
       },
-      include: params.include,
+      include: {
+        student: params.include?.student || false,
+      },
     });
+
     if (!question) {
       return null;
     }
+
     return {
       ...question,
       tutors: (question.tutors as Question['tutors']).map((item) => ({
@@ -64,6 +93,9 @@ export class QuestionPrismaRepository implements QuestionRepository {
         avaliation: item.avaliation,
         chatRoomId: item.chatRoomId,
       })),
+      ...(params.include?.subject
+        ? { subject: Subjects.find((s) => s.id === question.subjectId) }
+        : {}),
     };
   }
 
@@ -75,7 +107,9 @@ export class QuestionPrismaRepository implements QuestionRepository {
         urgency: params.urgency,
         difficulty: params.difficulty,
       },
-      include: params.include,
+      include: {
+        student: params.include?.student || false,
+      },
     });
 
     return questions.map((q) => ({
@@ -85,6 +119,9 @@ export class QuestionPrismaRepository implements QuestionRepository {
         avaliation: item.avaliation,
         chatRoomId: item.chatRoomId,
       })),
+      ...(params.include?.subject
+        ? { subject: Subjects.find((s) => s.id === q.subjectId) }
+        : {}),
     }));
   }
 

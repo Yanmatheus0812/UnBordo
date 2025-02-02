@@ -8,6 +8,12 @@ export namespace IQuestionService {
       questions: Array<
         IQuestion & {
           student: IStudent;
+          subject: {
+            id: string;
+            code: string;
+            name: string;
+            departmentCode: string;
+          };
         }
       >;
     };
@@ -35,6 +41,18 @@ export namespace IQuestionService {
     };
 
     export type Response = {
+      question: IQuestion;
+    };
+  }
+  
+
+  export namespace Reply {
+    export type Request = {
+      questionId: string;
+    };
+
+    export type Response = {
+      chatRoomId: string;
       question: IQuestion;
     };
   }

@@ -20,6 +20,7 @@ export class GetQuestionUsecase {
       id: validatedInput.questionId,
       include: {
         student: true,
+        subject: true,
       },
     });
 

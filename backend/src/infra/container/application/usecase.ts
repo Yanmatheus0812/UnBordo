@@ -4,12 +4,14 @@ import {
   ConfirmForgotPasswordCodeUsecase,
   CreateQuestionUsecase,
   DeleteQuestionUsecase,
+  GetAllChatUsecase,
   GetAllQuestionsUsecase,
   GetAllSubjectsUsecase,
   GetQuestionUsecase,
   LoginUsecase,
   RegisterConfirmUsecase,
   RegisterUsecase,
+  ReplyQuestionUsecase,
   RequestForgotPasswordCodeUsecase,
   SendEmailUsecase,
 } from '@/application/usecases';
@@ -18,8 +20,10 @@ import {
   ConfirmForgotPasswordCodeUsecaseZodValidator,
   ForumCreateQuestionUsecaseZodValidator,
   ForumDeleteQuestionUsecaseZodValidator,
+  ForumGetAllChatUsecaseZodValidator,
   ForumGetAllQuestionsUsecaseZodValidator,
   ForumGetQuestionUsecaseZodValidator,
+  ForumReplyQuestionUsecaseZodValidator,
   LoginUsecaseZodValidator,
   RegisterUsecaseZodValidator,
   RequestForgotPasswordCodeUsecaseZodValidator,
@@ -132,16 +136,30 @@ export function configureApplicationUsecaseDI(container: InfraDI) {
     )
     .add(
       ChangePasswordUsecase.Name,
-      ({
-        StudentRepository,
-        PasswordHash,
-        PasswordRecoveryRepository,
-      }) =>
+      ({ StudentRepository, PasswordHash, PasswordRecoveryRepository }) =>
         new ChangePasswordUsecase(
           new ChangePasswordUsecaseZodValidator(),
           StudentRepository,
           PasswordHash,
           PasswordRecoveryRepository,
+        ),
+    )
+    .add(
+      ReplyQuestionUsecase.Name,
+      ({ StudentRepository, QuestionRepository, ChatRoomRepository }) =>
+        new ReplyQuestionUsecase(
+          new ForumReplyQuestionUsecaseZodValidator(),
+          QuestionRepository,
+          StudentRepository,
+          ChatRoomRepository,
+        ),
+    )
+    .add(
+      GetAllChatUsecase.Name,
+      ({ ChatRoomRepository }) =>
+        new GetAllChatUsecase(
+          new ForumGetAllChatUsecaseZodValidator(),
+          ChatRoomRepository,
         ),
     );
 }

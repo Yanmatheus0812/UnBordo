@@ -1,52 +1,10 @@
 import ChatBox from '@/components/ui/chat/chatBox';
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-
-// Dados de exemplo
-const chatData = [
-  {
-    id: '1',
-    username: 'arthurtopzera',
-    message: 'Seguinte, voce faz aeweufbouwbc',
-    userImage: 'https://picsum.photos/66',
-  },
-  {
-    id: '2',
-    username: 'johndoe',
-    message: 'Hello, how are you?',
-    userImage: 'https://picsum.photos/67',
-  },
-  {
-    id: '3',
-    username: 'yanxbao',
-    message: 'fala meu peixe',
-    userImage: 'https://picsum.photos/68',
-  },
-  {
-    id: '4',
-    username: 'desalmado',
-    message: 'então parceiro, voce faz aewufbouwbc',
-    userImage: 'https://picsum.photos/69',
-  },
-  {
-    id: '5',
-    username: 'john textor',
-    message: 'eu ein',
-    userImage: 'https://picsum.photos/65',
-  },
-  {
-    id: '6',
-    username: 'jao das neves',
-    message: 'nunca na minha vida eu vi alguem tao',
-    userImage: 'https://picsum.photos/676',
-  },
-  {
-    id: '7',
-    username: 'nepo baby',
-    message: 'chuchuuuu',
-    userImage: 'https://picsum.photos/96',
-  },
-];
+import { useChat } from './chat';
+import { Box } from '@/components/ui/box';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useUnBordo } from '@/hooks/unbordo';
 
 //lnha entre as conversas
 const ItemSeparator = () => {
@@ -54,32 +12,74 @@ const ItemSeparator = () => {
 };
 
 export default function ChatList() {
-  const handleChatPress = (username : string) => {
-    // TODO: logica para abrir o chat
-    console.log(`Abrir chat com ${username}`);
+  const handleChatPress = (chatId: string) => {
+    console.log(`Abrir chat ${chatId}`);
   };
+
+  const { query } = useChat();
+
+  const { auth } = useUnBordo();
 
   return (
     //o <layout> n ta deixando scrollar
     <View style={styles.container}>
       <Text style={styles.title}>Conversas</Text>
       <FlatList
-        data={chatData}
+        data={query.data?.data.chats || []}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ChatBox
-            username={item.username}
-            message={item.message}
-            userImage={item.userImage}
-            onPress={() => handleChatPress(item.username)}
-          />
-        )}
+        ListEmptyComponent={() =>
+          query.isFetching ? (
+            <Box className="min-w-full flex flex-col gap-2 ">
+              <Skeleton
+                variant="rounded"
+                className="h-28 w-full bg-gray-300"
+                speed={3}
+              />
+              <Skeleton
+                variant="rounded"
+                className="h-28 w-full bg-gray-300"
+                speed={3}
+              />
+              <Skeleton
+                variant="rounded"
+                className="h-28 w-full bg-gray-300"
+                speed={3}
+              />
+              <Skeleton
+                variant="rounded"
+                className="h-28 w-full bg-gray-300"
+                speed={3}
+              />
+              <Skeleton
+                variant="rounded"
+                className="h-28 w-full bg-gray-300"
+                speed={3}
+              />
+            </Box>
+          ) : (
+            <Text className="font-raleway">
+              Você ainda não possui nenhuma conversa
+            </Text>
+          )
+        }
+        renderItem={({ item }) => {
+          const me = item.studentId === auth.student.id ? 'student' : 'tutor';
+          const other = me === 'student' ? 'tutor' : 'student';
+          console.log(item[other].name);
+          return (
+            <ChatBox
+              username={item[other].name}
+              message={'item[other].name'}
+              // userImage={item[other].avatarUrl}
+              onPress={() => handleChatPress(item.id)}
+            />
+          );
+        }}
         ItemSeparatorComponent={ItemSeparator}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
       />
     </View>
-
   );
 }
 
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: "Itim_400Regular",
-    color: "#1E293B",
+    fontFamily: 'Itim_400Regular',
+    color: '#1E293B',
     paddingBottom: 18,
   },
   listContent: {

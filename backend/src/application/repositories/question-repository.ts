@@ -3,6 +3,7 @@ import {
   QuestionDifficulties,
   QuestionUrgencies,
   Student,
+  Subject,
 } from '@/domain';
 
 export namespace QuestionRepository {
@@ -16,7 +17,10 @@ export namespace QuestionRepository {
   export namespace Update {
     export type Input = Partial<Question>;
 
-    export type Output = Question | null;
+    export type Output = Question & {
+      student?: Student;
+      subject?: Subject;
+    } | null;
   }
 
   export namespace FindBy {
@@ -29,6 +33,7 @@ export namespace QuestionRepository {
       difficulty: QuestionDifficulties;
       include: Partial<{
         student: boolean;
+        subject: boolean;
       }>;
     }>;
 
@@ -43,6 +48,7 @@ export namespace QuestionRepository {
       difficulty: QuestionDifficulties;
       include: Partial<{
         student: boolean;
+        subject: boolean;
       }>;
     }>;
 
