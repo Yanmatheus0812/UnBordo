@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { AuthService } from '@/http/services/auth';
+import { AuthService } from '@/services/http/services/auth';
 import { useRouter } from 'expo-router';
 import { useUnBordo } from '@/hooks/unbordo';
-import { api } from '@/http/api';
+import { api } from '@/services/http/api';
 
 export type IFormInputs = {
   registration: string;
@@ -65,6 +65,7 @@ export const useLogin = () => {
           router.replace('/(app)/(home)');
         },
         onError: (error: any) => {
+          console.log(JSON.stringify(error, null, 2));
           console.log(JSON.stringify(error?.response?.data, null, 2));
 
           switch (error?.response?.data?.type) {

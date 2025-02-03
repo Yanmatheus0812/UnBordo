@@ -1,19 +1,23 @@
-import ChatBox from '@/components/ui/chat/chatBox';
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useChat } from './chat';
 import { Box } from '@/components/ui/box';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useUnBordo } from '@/hooks/unbordo';
+import { useRouter } from 'expo-router';
+import ChatBox from '@/components/ui/chat/chatBox';
 
-//lnha entre as conversas
-const ItemSeparator = () => {
-  return <View style={styles.separator} />;
-};
-
+const ItemSeparator = () => <View style={styles.separator} />;
 export default function ChatList() {
+  const router = useRouter();
+
   const handleChatPress = (chatId: string) => {
-    console.log(`Abrir chat ${chatId}`);
+    router.push({
+      pathname: '/(app)/(chat)/view',
+      params: {
+        chatId: chatId,
+      },
+    });
   };
 
   const { query } = useChat();
@@ -21,7 +25,6 @@ export default function ChatList() {
   const { auth } = useUnBordo();
 
   return (
-    //o <layout> n ta deixando scrollar
     <View style={styles.container}>
       <Text style={styles.title}>Conversas</Text>
       <FlatList
@@ -65,11 +68,13 @@ export default function ChatList() {
         renderItem={({ item }) => {
           const me = item.studentId === auth.student.id ? 'student' : 'tutor';
           const other = me === 'student' ? 'tutor' : 'student';
-          console.log(item[other].name);
+
+          // console.log(JSON.stringify(item, null, 2));
+
           return (
             <ChatBox
               username={item[other].name}
-              message={'item[other].name'}
+              // message={item.subjectId}
               // userImage={item[other].avatarUrl}
               onPress={() => handleChatPress(item.id)}
             />
@@ -81,13 +86,13 @@ export default function ChatList() {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-    marginHorizontal: 20,
+    paddingTop: 30,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 32,
@@ -95,8 +100,29 @@ const styles = StyleSheet.create({
     color: '#1E293B',
     paddingBottom: 18,
   },
+  chatItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  userImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  username: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  lastMessage: {
+    fontSize: 14,
+    color: '#666',
+  },
   listContent: {
-    paddingBottom: 20,
+    paddingBottom: 16,
   },
   separator: {
     height: 1,
