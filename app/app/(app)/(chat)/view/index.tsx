@@ -4,46 +4,26 @@ import { useLocalSearchParams } from 'expo-router';
 import ChatHeader from '@/components/ui/chat/chatHeader';
 import MessageInput from '@/components/ui/chat/messageInput';
 import MessageBalloon from '@/components/ui/chat/message';
-
-
-type Messages = {
-  [key: string]: { id: string; text: string; senderId: string; receiverId: string; timestamp: string }[];
-};
-
-const mockMessages: Messages = {
-  chat1: [
-    { id: '1', text: 'Olá, como você está?', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:00:00Z' },
-    { id: '2', text: 'Estou bem, obrigado! E você?', senderId: '456', receiverId: '123', timestamp: '2023-10-01T12:01:00Z' },
-    { id: '3', text: 'Também estou bem!', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:02:00Z' },
-    { id: '4', text: 'Que bom!', senderId: '456', receiverId: '123', timestamp: '2023-10-01T12:03:00Z' },
-    { id: '5', text: 'Você pode me ajudar com um problema?', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:04:00Z' },
-    { id: '6', text: 'Claro, qual é o problema?', senderId: '456', receiverId: '123', timestamp: '2023-10-01T12:05:00Z' },
-    { id: '7', text: 'Estou com dificuldade em entender o conceito de closures em JavaScript.', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:06:00Z' },
-    { id: '8', text: 'Muito obrigado pela explicação!', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:07:00Z' },
-    { id: '9', text: 'De nada! Se precisar de mais alguma coisa, estarei aqui.', senderId: '456', receiverId: '123', timestamp: '2023-10-01T12:08:00Z' },
-  ],
-  chat2: [
-    { id: '1', text: 'Olá, você está disponível para uma reunião?', senderId: '456', receiverId: '123', timestamp: '2023-10-01T12:00:00Z' },
-    { id: '2', text: 'Sim, estou disponível. Quando seria?', senderId: '123', receiverId: '456', timestamp: '2023-10-01T12:01:00Z' },
-  ],
-};
+import { useUnBordo } from '@/hooks/unbordo';
+import { IChatMessage } from '@/interfaces/application';
+import { useQuery } from '@tanstack/react-query';
+import { ChatService } from '@/services/http/services/chat';
 
 export default function ChatView() {
+  const { chatId } = useLocalSearchParams() as { chatId: string };
   const {
     auth: { student },
     socket,
   } = useUnBordo();
 
-    const [messages, setMessages] = useState<Messages[keyof Messages]>([]);
-    const [inputMessage, setInputMessage] = useState('');
+  const [messages, setMessages] = useState<IChatMessage[]>([]);
+  const [inputMessage, setInputMessage] = useState('');
+  const chatView = useRef<FlatList | null>(null);
 
-    useEffect(() => {
-        // Carregar mensagens específicas do chat
-        if (chatId && mockMessages[chatId]) {
-            setMessages(mockMessages[chatId]);
-        }
-    }, [chatId]);
-
+  const query = useQuery({
+    queryKey: ['chat', chatId],
+    queryFn: () => ChatService.get(chatId),
+  });
   const handleSendMessage = (message: string, imageUri: string | null) => {
     if (message.trim() || imageUri) {
       if (!socket || !socket?.connected) return;
@@ -66,21 +46,26 @@ export default function ChatView() {
   );
 
   useEffect(() => {
-    if(socket && socket.connected) {
+    if (socket && socket.connected) {
       socket.on(chatId, (newMsg: IChatMessage) => {
-        setMessages((old) => [...old, newMsg])
-      })
+        setMessages((old) => [...old, newMsg]);
+      });
     }
   }, [socket]);
-
-    const renderMessageItem = ({ item }) => (
-        <MessageBalloon text={item.text} sender={item.senderId === currentUserId ? 'me' : 'them'} image={item.image} />
-    );
 
   const chat = query.data?.data;
 
   const me = query.data?.data.studentId === student.id ? 'student' : 'tutor';
-  const them = chat[me === 'student' ? 'tutor' : 'student'];
+  const them = chat?.[me === 'student' ? 'tutor' : 'student'];
+
+  useEffect(() => {
+    if(chat?.messages) {
+      setMessages(old => [
+        ...chat.messages,
+        ...old,
+      ])
+    }
+  }, [chat?.messages])
 
   return (
     <View style={styles.container}>
@@ -109,13 +94,14 @@ export default function ChatView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
+    // paddingTop: 100,
     paddingBottom: Platform.OS === 'ios' ? 100 : 0,
   },
   messagesContainer: {
     flexGrow: 1,
     padding: 16,
-    paddingBottom: 0, // Adiciona paddingBottom para evitar que o conteúdo fique atrás do campo de entrada
-    marginBottom: 100,
+    paddingBottom: 100, // Adiciona paddingBottom para evitar que o conteúdo fique atrás do campo de entrada
+    // marginBottom: 100,
+    marginTop: 100,
   },
 });

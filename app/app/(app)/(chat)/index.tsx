@@ -4,11 +4,10 @@ import { useChat } from './chat';
 import { Box } from '@/components/ui/box';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useUnBordo } from '@/hooks/unbordo';
+import { useRouter } from 'expo-router';
+import ChatBox from '@/components/ui/chat/chatBox';
 
-const ChatList = () => {
-  const router = useRouter();
-  const currentUserId = '123'; // ID do usuário atual
-
+const ItemSeparator = () => <View style={styles.separator} />;
 export default function ChatList() {
   const router = useRouter();
 
@@ -86,8 +85,6 @@ export default function ChatList() {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  );
-
   );
 };
 

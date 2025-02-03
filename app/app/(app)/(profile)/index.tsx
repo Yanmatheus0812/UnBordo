@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button2';
 import { Text } from '@/components/ui/text';
 import { useUnBordo } from '@/hooks/unbordo';
 import { useRouter } from 'expo-router';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function Profile() {
   const { auth } = useUnBordo();
@@ -102,5 +102,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default PerfilScreen;

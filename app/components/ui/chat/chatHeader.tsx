@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import ChatOptions from '@/components/ui/chat/chatOption'; // Certifique-se de que o caminho está correto
-import { BackButton } from '@/components/ui/backheader'; // Certifique-se de que o caminho está correto
+import SVGBackButton from '@/assets/images/back-button';
+
+import { Box } from '../box';
 
 interface ChatHeaderProps {
   username: string;
@@ -29,19 +31,36 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ username, userImage }) => {
   const [reportQuestionVisible, setReportQuestionVisible] = useState(false);
   const [reportEndVisible, setReportEndVisible] = useState(false);
 
-    return (
-        <View style={styles.header}>
-            <TouchableOpacity onPress={() => router.back()}>
-                <BackButton onPress={() => router.back()} label="" />
+  return (
+    <View className="z-10">
+      <View style={styles.header}>
+        <Box className="flex flex-row justify-between w-full items-center">
+          <Box className="flex flex-row w-full items-center gap-2">
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{
+                backgroundColor: '#DDE4EE',
+                zIndex: 10,
+                borderRadius: 12,
+                width: 36,
+                aspectRatio: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <SVGBackButton />
             </TouchableOpacity>
-            <Image source={{ uri: userImage }} style={styles.userImage} />
-            <Text style={styles.title}>{username}</Text>
+            <Box className="items-center flex flex-row">
+              <Image source={{ uri: userImage }} style={styles.userImage} />
+              <Text style={styles.title}>{username}</Text>
+            </Box>
           </Box>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Text style={styles.options}>...</Text>
+          </TouchableOpacity>
         </Box>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.options}>...</Text>
-        </TouchableOpacity>
-      </Box>
+      </View>
       <ChatOptions
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -77,10 +96,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    height: 100,
+    height: 120,
     backgroundColor: '#173CAC',
     paddingHorizontal: 20,
-    paddingTop: 20, // Adiciona paddingTop para evitar que o conteúdo fique atrás do cabeçalho
+    paddingTop: 30, // Adiciona paddingTop para evitar que o conteúdo fique atrás do cabeçalho
   },
   userImage: {
     width: 48,

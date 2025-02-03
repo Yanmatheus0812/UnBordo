@@ -1,4 +1,4 @@
-import { Text, Pressable, StyleProp, ViewStyle } from "react-native";
+import { Text, Pressable, StyleProp, ViewStyle, StyleSheet } from "react-native";
 import { HStack } from "@/components/ui/hstack";
 import SVGBackButton from "@/assets/images/back-button";
 
