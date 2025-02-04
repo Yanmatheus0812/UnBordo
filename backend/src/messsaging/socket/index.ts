@@ -15,6 +15,15 @@ export class Socket {
     // console.log(this.io);
     logger.info('Socket is up!!!');
 
+    this.io.attachApp({ // Connection state recovery must be enabled by the server - não sei se esse meetodo atachApp e usado certo, na documentacao do socket.io ele criava um novo server...
+      connectionStateRecovery: {
+        // the backup duration of the sessions and the packets
+        maxDisconnectionDuration: 2 * 60 * 1000,
+        // whether to skip middlewares upon successful recovery
+        skipMiddlewares: true,
+      },
+    });
+
     this.io.on('connection', (socket) => {
       logger.info('a user connected');
 
@@ -37,10 +46,13 @@ export class Socket {
 
       //   // this.socketIdUserId[socket.id] = user.id;
       // });
-
-      Object.keys(receivers).forEach((receiver) => {
-        socket.on(receiver, receivers[receiver](socket));
-      });
+      if (!socket.recovered) {
+        Object.keys(receivers).forEach((receiver) => {
+          socket.on(receiver, receivers[receiver](socket));
+        });
+      } else {
+        // recovery was successful: socket.id, socket.rooms and socket.data were restored
+      }
       // socket.on('send-message', (message) => {
       //   console.log(message);
 
