@@ -1,7 +1,7 @@
 # 2024.2 Wunjo - Projeto UnBordo
 
 <p align="center">
-  <img src="./docs/view/logoUnBordo.PNG" height='300px' style={{ display: 'block', margin: 'auto', marginTop: '100px' }} />
+  <img src="./docs/view/LogoUnBordo.svg" height='300px' style={{ display: 'block', margin: 'auto', marginTop: '100px' }} />
 </p>
 
 ## Sobre
