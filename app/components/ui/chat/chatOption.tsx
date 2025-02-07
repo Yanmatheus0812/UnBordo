@@ -1,6 +1,6 @@
 // ChatOptions.tsx
 import React, { useState } from 'react';
-import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from "@/components/ui/input";
 import { StyleSheet } from 'react-native';
@@ -370,10 +370,11 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
         visible={reportQuestionVisible}
         onRequestClose={() => setReportQuestionVisible(false)}
       >
-        <TouchableWithoutFeedback onPress={() => setReportModalVisible(false)}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={{ flex: 1, width: "100%" }}>
           <View style={styles.modalOverlay}>
             <TouchableWithoutFeedback onPress={() => { }}>
-              <View style={[styles.modalContent, { height: "40%", justifyContent: 'center' }]}>
+              <View style={[styles.modalContent, { height: 350, justifyContent: 'center' }]}>
                 <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
                 <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10 }}>Descreva o motivo da denúncia</Text>
                 <Input
@@ -418,6 +419,7 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
                 </Button>
               </View>
             </TouchableWithoutFeedback>
+          </View>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
