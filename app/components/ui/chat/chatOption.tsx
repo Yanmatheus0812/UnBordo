@@ -1,17 +1,11 @@
 // ChatOptions.tsx
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native';
-import { Button, ButtonText } from '@/components/ui/button';
-import { Input, InputField } from "@/components/ui/input";
-import { StyleSheet } from 'react-native';
-import { Select } from '@/components/ui/select';
-=======
 import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from "@/components/ui/input";
 import { StyleSheet } from 'react-native';
 import PlayerProfile from '../player-profile';
+import { Select } from '../select';
 
 //simulacao usuario
 const user = {
@@ -29,7 +23,6 @@ const user = {
   average: 4.5,
   points: 121,
 };
->>>>>>> 15023275eab8cedb204c59bd06a129e1d9a7b93f
 
 interface ChatOptionsProps {
   modalVisible: boolean;
@@ -66,16 +59,13 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
   reportQuestionVisible, setReportQuestionVisible,
   reportEndVisible, setReportEndVisible
 }) => {
-<<<<<<< HEAD
   const [modalDenunciaVisible, setModalDenunciaVisible] = useState(false);
     const [denuncia, setDenuncia] = useState('');
-=======
 
   const [showProfile, setShowProfile] = useState(false);
   const handleSeeProfile = () => {
     setShowProfile(true);
   };
->>>>>>> 15023275eab8cedb204c59bd06a129e1d9a7b93f
   return (
     <>
       {/* Modal de opcoes */}
@@ -387,7 +377,6 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
                 <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
                 <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10 }}>Descreva o motivo da denúncia</Text>
                 <Input
-<<<<<<< HEAD
                 variant="outline"  
                 style={{ 
                     borderColor: 'black', 
@@ -398,18 +387,6 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
                 }}>
                     <InputField 
                     placeholder="Digite o motivo aqui" 
-=======
-                  variant="outline"  // Usando a variante 'outline' para borda
-                  style={{
-                    borderColor: 'black',
-                    marginBottom: 20,
-                    height: "15%",               // Altura ajustada
-                    width: "100%",            // Largura ajustada
-                    paddingLeft: 15,          // Para o texto não ficar colado na borda
-                  }}>
-                  <InputField
-                    placeholder="Digite o motivo aqui"
->>>>>>> 15023275eab8cedb204c59bd06a129e1d9a7b93f
                     multiline={true}  // Permite múltiplas linhas
                     numberOfLines={4}  // Número de linhas
                   />
@@ -522,17 +499,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
   },
-<<<<<<< HEAD
   optionText: {
     padding: 15,
     fontSize: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-=======
+  },
   fullScreenModal: {
     flex: 1,
     backgroundColor: '#FFF',
->>>>>>> 15023275eab8cedb204c59bd06a129e1d9a7b93f
   },
 });
 
