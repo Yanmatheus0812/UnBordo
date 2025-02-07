@@ -8,6 +8,7 @@ import { useRouter } from 'expo-router';
 import ChatBox from '@/components/ui/chat/chatBox';
 
 const ItemSeparator = () => <View style={styles.separator} />;
+
 export default function ChatList() {
   const router = useRouter();
 
@@ -78,6 +79,7 @@ export default function ChatList() {
               // userImage={item[other].avatarUrl}
               onPress={() => handleChatPress(item.id)}
             />
+            
           );
         }}
         ItemSeparatorComponent={ItemSeparator}
