@@ -281,12 +281,12 @@ const PerfilScreen = () => {
         <View style={styles.center}>
           <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Conta</Text></View>
 
-        <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(delete)')}>
+        <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(change)')}>
           <Text style={{ fontSize: 16, color: '#3b82f6' }}>Alterar senha</Text>
         </TouchableOpacity>
 
       </View>
-      <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(change)')}>
+      <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(delete)')}>
         <Text style={styles.deleteLink}>Excluir conta</Text>
       </TouchableOpacity>
 

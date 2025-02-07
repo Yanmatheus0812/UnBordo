@@ -64,7 +64,7 @@ export default function ExcluirConta() {
                         size="lg"
                         variant="outline"
                         action="primary"
-                        onPress={() => router.push('/(app)/(profile)')}
+                        onPress={() => router.back()}
                     >
                         <ButtonText style={{ color: 'gray' }}>Cancelar</ButtonText>
                     </Button>

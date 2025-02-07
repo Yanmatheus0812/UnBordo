@@ -16,6 +16,7 @@ import { BackHeader } from "@/components/ui/backheader";
 import { CheckBox } from "@/components/ui/checkbox";
 import Binoculars from "@/assets/images/Binoculars";
 import { router } from "expo-router";
+import {TouchableWithoutFeedback} from "react-native"
 
 function Option({ actual, label, set }: { actual: string, label: string, set: (value: string) => void }) {
     return <Pressable
@@ -71,6 +72,8 @@ export function Template({
             height: "100%",
             alignItems: "center"
         }}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={{ flex: 1, width: "100%" }}>
             {image}
             {/* Botão de voltar */}
             <BackHeader
@@ -149,6 +152,8 @@ export function Template({
                     }}
                 />
             </View>
+            </View>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     );
 }
@@ -166,8 +171,8 @@ export default function Screen()
                 style={{
                     // backgroundColor: "red",
                     position: "absolute",
-                    bottom: 0,
-                    right: 0,
+                    bottom: -20,
+                    right: -20,
                 }}
             />
         }

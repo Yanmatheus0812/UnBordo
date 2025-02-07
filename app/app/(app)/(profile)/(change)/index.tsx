@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard, Platform, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Input } from "@/components/ui/input2";
 import { BackHeader } from '@/components/ui/backheader';
 import PirateClosedEyes from '@/assets/images/pirate-closed-eyes';
@@ -36,20 +36,29 @@ export default function AlterarSenha() {
             </View>
         );
     }
-    return (
-        <View style={styles.container}>
-            <BackHeader style={styles.customBackHeader}
-                onPress={() => router.back()} label="" />
-            <Text style={styles.title}>Alterar Senha</Text>
-            <Input style={styles.input} label="Senha Atual" placeholder="Digite aqui..." />
-            <Input style={styles.input} label="Nova Senha" placeholder="Digite aqui..." />
-            <Input style={styles.input} label="Confirmar Nova Senha" placeholder="Digite aqui..." />
-            <Button variant='solid' style={{ width: 288, height: 50 }} onPress={handleChangePassword}>
-                <ButtonText>Alterar</ButtonText>
-            </Button>
+    return (         
+        <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'} // Ajuste o comportamento conforme o SO
+    >
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <View style={styles.container}>
+                    <BackHeader style={styles.customBackHeader}
+                        onPress={() => router.back()} label="" />
+                    <Text style={styles.title}>Alterar Senha</Text>
+                    <Input style={styles.input} label="Senha Atual" placeholder="Digite aqui..." />
+                    <Input style={styles.input} label="Nova Senha" placeholder="Digite aqui..." />
+                    <Input style={styles.input} label="Confirmar Nova Senha" placeholder="Digite aqui..." />
+                    <Button variant='solid' style={{ width: 288, height: 50 }} onPress={handleChangePassword}>
+                        <ButtonText>Alterar</ButtonText>
+                    </Button>
 
-            <PirateClosedEyes style={styles.piratePosition} />
-        </View>
+                    <PirateClosedEyes style={styles.piratePosition} />
+                </View>
+            </ScrollView>
+        </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
     );
 }
 
@@ -77,9 +86,9 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     piratePosition: {
-        position: 'absolute',
+        position: 'relative',
         bottom: -22,
-        right: -25,
+        right: -100,
     },
     text: {
         fontFamily: 'Raleway_400Regular',

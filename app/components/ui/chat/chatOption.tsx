@@ -1,9 +1,10 @@
 // ChatOptions.tsx
-import React from 'react';
-import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from "@/components/ui/input";
 import { StyleSheet } from 'react-native';
+import { Select } from '@/components/ui/select';
 
 interface ChatOptionsProps {
   modalVisible: boolean;
@@ -40,6 +41,8 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
   reportQuestionVisible, setReportQuestionVisible,
   reportEndVisible, setReportEndVisible
 }) => {
+  const [modalDenunciaVisible, setModalDenunciaVisible] = useState(false);
+    const [denuncia, setDenuncia] = useState('');
   return (
     <>
       {/* Modal de opcoes */}
@@ -280,12 +283,37 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
           <View style={styles.modalOverlay}>
             <TouchableWithoutFeedback onPress={() => { }}>
               <View style={[styles.modalContent, { height: "40%" }]}>
-                <Text style={styles.textReport}>Por qual motivo deseja denunciar?</Text>
+                <Text style={{ ...styles.textReport, marginBottom: 40 }}>Por qual motivo deseja denunciar?</Text>
+                        <Select
+                          label=""
+                          placeholder="Selecione o motivo"
+                          value={denuncia}
+
+                          modalVisible={modalDenunciaVisible}
+                          setModalVisible={setModalDenunciaVisible}
+                        >
+                          {/* Lista de opções */}
+                          <TouchableOpacity onPress={() => {setDenuncia('Abuso'); setModalDenunciaVisible(false);}}>
+                            <Text style={styles.optionText}>Abuso</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => {setDenuncia('Comunicação Imprópria'); setModalDenunciaVisible(false);}}>
+                            <Text style={styles.optionText}>Comunicação imprópria</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => {setDenuncia('Preconceito'); setModalDenunciaVisible(false);}}>
+                            <Text style={styles.optionText}>Preconceito</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => {setDenuncia('Uso indevido da plataforma'); setModalDenunciaVisible(false);}}>
+                            <Text style={styles.optionText}>Uso indevido da plataforma</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => {setDenuncia('Outros...'); setModalDenunciaVisible(false);}}>
+                            <Text style={styles.optionText}>Outros...</Text>
+                          </TouchableOpacity>
+                        </Select>
                 <Button
                   size="lg"
                   action="primary"
                   variant="solid"
-                  style={{ marginBottom: 10, width: "100%" }}
+                  style={{ marginBottom: 10, width: "100%", marginTop: 40}}
                   onPress={() => {
                     setReportModalVisible(false);
                     setReportQuestionVisible(true);
@@ -324,13 +352,13 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
                 <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
                 <Text style={{textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10}}>Descreva o motivo da denúncia</Text>
                 <Input
-                variant="outline"  // Usando a variante 'outline' para borda
+                variant="outline"  
                 style={{ 
                     borderColor: 'black', 
                     marginBottom: 20,
-                    height: "15%",               // Altura ajustada
-                    width: "100%",            // Largura ajustada
-                    paddingLeft: 15,          // Para o texto não ficar colado na borda
+                    height: "15%",               
+                    width: "100%",           
+                    paddingLeft: 15,         
                 }}>
                     <InputField 
                     placeholder="Digite o motivo aqui" 
@@ -435,6 +463,12 @@ const styles = StyleSheet.create({
     fontFamily: "Raleway_400Regular",
     marginTop: 10,
     textAlign: "center",
+  },
+  optionText: {
+    padding: 15,
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
 });
 
