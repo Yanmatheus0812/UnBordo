@@ -1,9 +1,27 @@
 // ChatOptions.tsx
-import React from 'react';
-import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from "@/components/ui/input";
 import { StyleSheet } from 'react-native';
+import PlayerProfile from '../player-profile';
+
+//simulacao usuario
+const user = {
+  id: '1',
+  name: 'Renan V. Guedes',
+  avatar: require('@/assets/avatars/avatar1.webp'),
+  email: '21012345@aluno.unb.br',
+  title: 'Marujo',
+  course: 'Engenharia Aeroespacial',
+  matricula: '21012345',
+  ranking: 1,
+  gamification: true,
+  answers: 42,
+  questions: 10,
+  average: 4.5,
+  points: 121,
+};
 
 interface ChatOptionsProps {
   modalVisible: boolean;
@@ -40,6 +58,11 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
   reportQuestionVisible, setReportQuestionVisible,
   reportEndVisible, setReportEndVisible
 }) => {
+
+  const [showProfile, setShowProfile] = useState(false);
+  const handleSeeProfile = () => {
+    setShowProfile(true);
+  };
   return (
     <>
       {/* Modal de opcoes */}
@@ -59,7 +82,9 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
                   }}>
                   <Text style={styles.modalButtonText}>Encerrar bate papo</Text>
                 </TouchableOpacity>
-                <Text style={styles.modalButtonText}>Ver perfil</Text>
+                <TouchableOpacity onPress={() => handleSeeProfile()}>
+                  <Text style={styles.modalButtonText}>Ver perfil</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
                     setModalVisible(false);
@@ -322,21 +347,21 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
             <TouchableWithoutFeedback onPress={() => { }}>
               <View style={[styles.modalContent, { height: "40%", justifyContent: 'center' }]}>
                 <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
-                <Text style={{textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10}}>Descreva o motivo da denúncia</Text>
+                <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10 }}>Descreva o motivo da denúncia</Text>
                 <Input
-                variant="outline"  // Usando a variante 'outline' para borda
-                style={{ 
-                    borderColor: 'black', 
+                  variant="outline"  // Usando a variante 'outline' para borda
+                  style={{
+                    borderColor: 'black',
                     marginBottom: 20,
                     height: "15%",               // Altura ajustada
                     width: "100%",            // Largura ajustada
                     paddingLeft: 15,          // Para o texto não ficar colado na borda
-                }}>
-                    <InputField 
-                    placeholder="Digite o motivo aqui" 
+                  }}>
+                  <InputField
+                    placeholder="Digite o motivo aqui"
                     multiline={true}  // Permite múltiplas linhas
                     numberOfLines={4}  // Número de linhas
-                    />  
+                  />
                 </Input>
                 <Button
                   size="lg"
@@ -395,6 +420,16 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
           </View>
         </TouchableWithoutFeedback>
       </Modal>
+      {/* Modal de perfil */}
+      <Modal
+        transparent={true}
+        visible={showProfile}
+        onRequestClose={() => setShowProfile(false)}
+      >
+        <View style={styles.fullScreenModal}>
+          <PlayerProfile user={user} />
+        </View>
+      </Modal>
     </>
   );
 };
@@ -435,6 +470,10 @@ const styles = StyleSheet.create({
     fontFamily: "Raleway_400Regular",
     marginTop: 10,
     textAlign: "center",
+  },
+  fullScreenModal: {
+    flex: 1,
+    backgroundColor: '#FFF',
   },
 });
 
