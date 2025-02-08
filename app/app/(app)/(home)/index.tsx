@@ -63,7 +63,6 @@ const ForumHome = () => {
 
   const router = useRouter();
 
-
   useEffect(() => {
     query.refetch();
   }, [navigation.isFocused()])
@@ -272,7 +271,9 @@ const CardItem = ({
             )}
             {auth.student.id !== item.student.id && (
               <>
-                <Balloon />
+                <TouchableOpacity onPress={handleReply}>
+                  <Balloon />
+                </TouchableOpacity>
 
                 <TouchableOpacity onPress={onOpenModal}>
                   <MaterialIcons
