@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { Modal, TouchableWithoutFeedback, View, Text, TouchableOpacity, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from "@/components/ui/input";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import PlayerProfile from '../player-profile';
 import { Select } from '../select';
+import StarRating from './StarRating';
+
 
 //simulacao usuario
 const user = {
@@ -46,6 +48,7 @@ interface ChatOptionsProps {
   reportEndVisible: boolean;
   setReportEndVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 
 const ChatOptions: React.FC<ChatOptionsProps> = ({
   modalVisible, setModalVisible,
@@ -193,20 +196,21 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
         <TouchableWithoutFeedback onPress={() => setRateChatResponse(false)}>
           <View style={styles.modalOverlay}>
             <TouchableWithoutFeedback onPress={() => { }}>
-              <View style={[styles.modalContent, { height: "30%", justifyContent: "center" }]}>
+              <View style={[styles.modalContent, { height: "32%", justifyContent: "center" }]}>
                 <Text style={styles.textReport}>Deixe aqui sua avaliação!</Text>
                 <Text style={styles.modalText}>Avalie de acordo com a qualidade da resposta</Text>
+                <StarRating />
                 <Button
                   size="lg"
                   action="primary"
                   variant="solid"
-                  style={{ marginTop: 30, width: "100%" }}
+                  style={{marginTop:5, marginBottom: 5, width: "90%" }}
                   onPress={() => {
                     setRateChatResponse(false);
                     setChatEndResponse(true);
                   }}
                 >
-                  <ButtonText>Continuar</ButtonText>
+                  <ButtonText>Enviar</ButtonText>
                 </Button>
               </View>
             </TouchableWithoutFeedback>
@@ -472,7 +476,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContent: {
-    width: "60%",
+    width: "65%",
     backgroundColor: "#FFF",
     borderRadius: 10,
     padding: 20,
@@ -499,6 +503,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Raleway_400Regular",
     marginTop: 10,
+    marginBottom: 5,
     textAlign: "center",
   },
   optionText: {
