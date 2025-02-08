@@ -231,10 +231,10 @@ const CardItem = ({
           >
             {item.urgency === QuestionUrgencies.HIGH && (
               <View style={styles.urgentTag}>
-                <Text style={styles.urgentText}>Urgente</Text>
+                <Text style={styles.urgentText}>!</Text>
               </View>
             )}
-            {auth.student.id !== item.student.id && (
+            {auth.student.id === item.student.id && (
               <>
                 <Balloon />
 
@@ -378,20 +378,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Itim_400Regular',
   },
-  subject: { fontSize: 14, color: '#666', fontFamily: 'Itim_400Regular', maxWidth: '95%' },
+  subject: { fontSize: 14, color: '#666', fontFamily: 'Itim_400Regular', maxWidth: '65%' },
   urgentTag: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#F5F6FA',
     borderRadius: 16,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginLeft: 16,
   },
-  urgentText: { color: '#fff', fontSize: 13, fontFamily: 'Itim_400Regular' },
+  urgentText: { color: '#FF0000', fontSize: 20, fontFamily: 'Itim_400Regular' },
   text: {
     fontSize: 14,
     color: '#333',
     marginVertical: 10,
     fontFamily: 'Raleway_400Regular',
+
   },
   readMore: {
     fontSize: 13,
