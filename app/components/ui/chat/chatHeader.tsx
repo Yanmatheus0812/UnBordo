@@ -8,7 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import ChatOptions from '@/components/ui/chat/chatOption'; // Certifique-se de que o caminho está correto
+import ChatOptions from '@/components/ui/chat/chatOption'; 
 import SVGBackButton from '@/assets/images/back-button';
 
 import { Box } from '../box';

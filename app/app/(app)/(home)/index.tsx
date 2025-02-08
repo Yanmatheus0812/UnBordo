@@ -40,10 +40,21 @@ import { useUnBordo } from '@/hooks/unbordo';
 import { Text } from '@/components/ui/text';
 import { useDisclose } from '@/hooks/use-disclose';
 import { queryClient } from '@/hooks/react-query';
+import ChatOptions from '@/components/ui/chat/chatOption'; 
 
 const ForumHome = () => {
 
-  const navigation = useNavigation();
+    const navigation = useNavigation();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [EndChatConfirmation, setEndChatConfirmation] = useState(false);
+    const [endChatQuestion, setEndChatQuestion] = useState(false);
+    const [rateChatResponse, setRateChatResponse] = useState(false);
+    const [rateChatNotResponse, setRateChatNotResponse] = useState(false);
+    const [ChatEndResponse, setChatEndResponse] = useState(false);
+    const [ChatEndNotResponse, setChatEndNotResponse] = useState(false);
+    const [reportModalVisible, setReportModalVisible] = useState(false);
+    const [reportQuestionVisible, setReportQuestionVisible] = useState(false);
+    const [reportEndVisible, setReportEndVisible] = useState(false);
   
   const query = useQuery({
     queryKey: ['forum', 'posts'],
@@ -68,6 +79,29 @@ const ForumHome = () => {
           }}
         />
       </View>
+      
+      <ChatOptions
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        EndChatConfirmation={EndChatConfirmation}
+        setEndChatConfirmation={setEndChatConfirmation}
+        endChatQuestion={endChatQuestion}
+        setEndChatQuestion={setEndChatQuestion}
+        rateChatResponse={rateChatResponse}
+        setRateChatResponse={setRateChatResponse}
+        rateChatNotResponse={rateChatNotResponse}
+        setRateChatNotResponse={setRateChatNotResponse}
+        ChatEndResponse={ChatEndResponse}
+        setChatEndResponse={setChatEndResponse}
+        ChatEndNotResponse={ChatEndNotResponse}
+        setChatEndNotResponse={setChatEndNotResponse}
+        reportModalVisible={reportModalVisible}
+        setReportModalVisible={setReportModalVisible}
+        reportQuestionVisible={reportQuestionVisible}
+        setReportQuestionVisible={setReportQuestionVisible}
+        reportEndVisible={reportEndVisible}
+        setReportEndVisible={setReportEndVisible}
+      />
 
       <View
         style={{
@@ -90,7 +124,7 @@ const ForumHome = () => {
       <FlatList<IQuestionService.Fetch.Response['questions'][0]>
         data={query.data?.data?.questions.filter((q) => q.status === QuestionStatuses.OPEN) || []}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <CardItem item={item} />}
+        renderItem={({ item }) => <CardItem item={item} setReportModalVisible={setReportModalVisible} />}
         ListEmptyComponent={() =>
           query.isFetching ? (
             <Box className="min-w-full flex flex-col gap-2 ">
@@ -168,8 +202,10 @@ const ForumHome = () => {
 
 const CardItem = ({
   item,
+  setReportModalVisible,
 }: {
   item: IQuestionService.Fetch.Response['questions'][0];
+  setReportModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [error, setError] = useState<string | null>(null);
 
@@ -298,7 +334,7 @@ const CardItem = ({
                 )}
               </TouchableOpacity>
               <Box className="w-full h-px bg-gray-300" />
-              <TouchableOpacity
+              <TouchableOpacity onPress={() => { setReportModalVisible(true); onModalClose(); }}
                 className="w-full p-4 items-center"
               >
                 <Text size="lg" className="font-raleway-bold">
