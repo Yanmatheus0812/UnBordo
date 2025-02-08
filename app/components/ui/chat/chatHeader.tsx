@@ -112,10 +112,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: 10,
-    fontSize: 24,
+    fontSize: 24, 
     fontWeight: 'bold',
     fontFamily: 'Itim_400Regular',
-    color: '#F5F6FA', // Cor da fonte do título
+    color: '#F5F6FA',
+    flexWrap: 'wrap', 
+    maxWidth: 198, 
+    overflow: 'hidden', 
+    textOverflow: 'ellipsis', 
   },
   options: {
     marginRight: 10,
