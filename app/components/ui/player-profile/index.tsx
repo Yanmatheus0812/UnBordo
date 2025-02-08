@@ -53,7 +53,7 @@ const ProfileScreen = ({ user }: { user: User }) => {
           <Text>Perguntas</Text>
         </View>
       </View>
-      <View style = {styles.separator}/>
+
       <View style={styles.pontuacaoContainer}>
         {user.gamification && (
           <View style={styles.moedasContainer}>

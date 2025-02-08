@@ -10,6 +10,7 @@ import {
   Button,
   TouchableWithoutFeedback,
 } from 'react-native';
+import ChatOptions from '@/components/ui/chat/chatOption'; 
 
 interface ChatBoxProps {
   username: string;
@@ -52,23 +53,28 @@ export default function ChatBox({
         <Text style={styles.options}>...</Text>
       </TouchableOpacity>
 
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.modalContent}>
-                <Text style={styles.modalButtonText}>Encerrar bate papo</Text>
-                <Text style={styles.modalButtonText}>Ver perfil</Text>
-                <Text style={styles.modalButtonText}>Denunciar</Text>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <ChatOptions
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        EndChatConfirmation={EndChatConfirmation}
+        setEndChatConfirmation={setEndChatConfirmation}
+        endChatQuestion={endChatQuestion}
+        setEndChatQuestion={setEndChatQuestion}
+        rateChatResponse={rateChatResponse}
+        setRateChatResponse={setRateChatResponse}
+        rateChatNotResponse={rateChatNotResponse}
+        setRateChatNotResponse={setRateChatNotResponse}
+        ChatEndResponse={ChatEndResponse}
+        setChatEndResponse={setChatEndResponse}
+        ChatEndNotResponse={ChatEndNotResponse}
+        setChatEndNotResponse={setChatEndNotResponse}
+        reportModalVisible={reportModalVisible}
+        setReportModalVisible={setReportModalVisible}
+        reportQuestionVisible={reportQuestionVisible}
+        setReportQuestionVisible={setReportQuestionVisible}
+        reportEndVisible={reportEndVisible}
+        setReportEndVisible={setReportEndVisible}
+      />
     </TouchableOpacity>
   );
 }

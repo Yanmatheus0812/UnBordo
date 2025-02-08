@@ -63,7 +63,7 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
   reportEndVisible, setReportEndVisible
 }) => {
   const [modalDenunciaVisible, setModalDenunciaVisible] = useState(false);
-    const [denuncia, setDenuncia] = useState('');
+  const [denuncia, setDenuncia] = useState('');
 
   const [showProfile, setShowProfile] = useState(false);
   const handleSeeProfile = () => {
@@ -313,36 +313,36 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
             <TouchableWithoutFeedback onPress={() => { }}>
               <View style={[styles.modalContent, { height: "40%" }]}>
                 <Text style={{ ...styles.textReport, marginBottom: 40 }}>Por qual motivo deseja denunciar?</Text>
-                        <Select
-                          label=""
-                          placeholder="Selecione o motivo"
-                          value={denuncia}
+                <Select
+                  label=""
+                  placeholder="Selecione o motivo"
+                  value={denuncia}
 
-                          modalVisible={modalDenunciaVisible}
-                          setModalVisible={setModalDenunciaVisible}
-                        >
-                          {/* Lista de opções */}
-                          <TouchableOpacity onPress={() => {setDenuncia('Abuso'); setModalDenunciaVisible(false);}}>
-                            <Text style={styles.optionText}>Abuso</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={() => {setDenuncia('Comunicação Imprópria'); setModalDenunciaVisible(false);}}>
-                            <Text style={styles.optionText}>Comunicação imprópria</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={() => {setDenuncia('Preconceito'); setModalDenunciaVisible(false);}}>
-                            <Text style={styles.optionText}>Preconceito</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={() => {setDenuncia('Uso indevido da plataforma'); setModalDenunciaVisible(false);}}>
-                            <Text style={styles.optionText}>Uso indevido da plataforma</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={() => {setDenuncia('Outros...'); setModalDenunciaVisible(false);}}>
-                            <Text style={styles.optionText}>Outros...</Text>
-                          </TouchableOpacity>
-                        </Select>
+                  modalVisible={modalDenunciaVisible}
+                  setModalVisible={setModalDenunciaVisible}
+                >
+                  {/* Lista de opções */}
+                  <TouchableOpacity onPress={() => { setDenuncia('Abuso'); setModalDenunciaVisible(false); }}>
+                    <Text style={styles.optionText}>Abuso</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setDenuncia('Comunicação Imprópria'); setModalDenunciaVisible(false); }}>
+                    <Text style={styles.optionText}>Comunicação imprópria</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setDenuncia('Preconceito'); setModalDenunciaVisible(false); }}>
+                    <Text style={styles.optionText}>Preconceito</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setDenuncia('Uso indevido da plataforma'); setModalDenunciaVisible(false); }}>
+                    <Text style={styles.optionText}>Uso indevido da plataforma</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setDenuncia('Outros...'); setModalDenunciaVisible(false); }}>
+                    <Text style={styles.optionText}>Outros...</Text>
+                  </TouchableOpacity>
+                </Select>
                 <Button
                   size="lg"
                   action="primary"
                   variant="solid"
-                  style={{ marginBottom: 10, width: "100%", marginTop: 40}}
+                  style={{ marginBottom: 10, width: "100%", marginTop: 40 }}
                   onPress={() => {
                     setReportModalVisible(false);
                     setReportQuestionVisible(true);
@@ -376,54 +376,54 @@ const ChatOptions: React.FC<ChatOptionsProps> = ({
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={{ flex: 1, width: "100%" }}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback onPress={() => { }}>
-              <View style={[styles.modalContent, { height: 350, justifyContent: 'center' }]}>
-                <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
-                <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10 }}>Descreva o motivo da denúncia</Text>
-                <Input
-                variant="outline"  
-                style={{ 
-                    borderColor: 'black', 
-                    marginBottom: 20,
-                    height: "15%",               
-                    width: "100%",           
-                    paddingLeft: 15,         
-                }}>
-                    <InputField 
-                    placeholder="Digite o motivo aqui" 
-                    multiline={true}  // Permite múltiplas linhas
-                    numberOfLines={4}  // Número de linhas
-                  />
-                </Input>
-                <Button
-                  size="lg"
-                  action="primary"
-                  variant="solid"
-                  style={{ marginBottom: 10, width: "100%", marginTop: 20 }}
-                  onPress={() => {
-                    setReportQuestionVisible(false);
-                    setReportEndVisible(true);
-                  }}
-                >
-                  <ButtonText>Continuar</ButtonText>
-                </Button>
+            <View style={styles.modalOverlay}>
+              <TouchableWithoutFeedback onPress={() => { }}>
+                <View style={[styles.modalContent, { height: 350, justifyContent: 'center' }]}>
+                  <Text style={styles.textReport}>Discorra sobre o acontecimento</Text>
+                  <Text style={{ textAlign: 'left', fontSize: 12, marginTop: 10, fontFamily: 'Raleway_400Regular', marginLeft: -10 }}>Descreva o motivo da denúncia</Text>
+                  <Input
+                    variant="outline"
+                    style={{
+                      borderColor: 'black',
+                      marginBottom: 20,
+                      height: "15%",
+                      width: "100%",
+                      paddingLeft: 15,
+                    }}>
+                    <InputField
+                      placeholder="Digite o motivo aqui"
+                      multiline={true}  // Permite múltiplas linhas
+                      numberOfLines={4}  // Número de linhas
+                    />
+                  </Input>
+                  <Button
+                    size="lg"
+                    action="primary"
+                    variant="solid"
+                    style={{ marginBottom: 10, width: "100%", marginTop: 20 }}
+                    onPress={() => {
+                      setReportQuestionVisible(false);
+                      setReportEndVisible(true);
+                    }}
+                  >
+                    <ButtonText>Continuar</ButtonText>
+                  </Button>
 
-                <Button
-                  size="lg"
-                  action="primary"
-                  variant="outline"
-                  style={{ marginBottom: 10, width: "100%" }}
-                  onPress={() => {
-                    setReportQuestionVisible(false);
-                    setReportModalVisible(true);
-                  }}
-                >
-                  <ButtonText>Voltar</ButtonText>
-                </Button>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
+                  <Button
+                    size="lg"
+                    action="primary"
+                    variant="outline"
+                    style={{ marginBottom: 10, width: "100%" }}
+                    onPress={() => {
+                      setReportQuestionVisible(false);
+                      setReportModalVisible(true);
+                    }}
+                  >
+                    <ButtonText>Voltar</ButtonText>
+                  </Button>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </Modal>

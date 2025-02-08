@@ -40,10 +40,21 @@ import { useUnBordo } from '@/hooks/unbordo';
 import { Text } from '@/components/ui/text';
 import { useDisclose } from '@/hooks/use-disclose';
 import { queryClient } from '@/hooks/react-query';
+import ChatOptions from '@/components/ui/chat/chatOption'; 
 
 const ForumHome = () => {
 
-  const navigation = useNavigation();
+    const navigation = useNavigation();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [EndChatConfirmation, setEndChatConfirmation] = useState(false);
+    const [endChatQuestion, setEndChatQuestion] = useState(false);
+    const [rateChatResponse, setRateChatResponse] = useState(false);
+    const [rateChatNotResponse, setRateChatNotResponse] = useState(false);
+    const [ChatEndResponse, setChatEndResponse] = useState(false);
+    const [ChatEndNotResponse, setChatEndNotResponse] = useState(false);
+    const [reportModalVisible, setReportModalVisible] = useState(false);
+    const [reportQuestionVisible, setReportQuestionVisible] = useState(false);
+    const [reportEndVisible, setReportEndVisible] = useState(false);
   
   const query = useQuery({
     queryKey: ['forum', 'posts'],
@@ -51,7 +62,6 @@ const ForumHome = () => {
   });
 
   const router = useRouter();
-
 
   useEffect(() => {
     query.refetch();
@@ -68,6 +78,29 @@ const ForumHome = () => {
           }}
         />
       </View>
+      
+      <ChatOptions
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        EndChatConfirmation={EndChatConfirmation}
+        setEndChatConfirmation={setEndChatConfirmation}
+        endChatQuestion={endChatQuestion}
+        setEndChatQuestion={setEndChatQuestion}
+        rateChatResponse={rateChatResponse}
+        setRateChatResponse={setRateChatResponse}
+        rateChatNotResponse={rateChatNotResponse}
+        setRateChatNotResponse={setRateChatNotResponse}
+        ChatEndResponse={ChatEndResponse}
+        setChatEndResponse={setChatEndResponse}
+        ChatEndNotResponse={ChatEndNotResponse}
+        setChatEndNotResponse={setChatEndNotResponse}
+        reportModalVisible={reportModalVisible}
+        setReportModalVisible={setReportModalVisible}
+        reportQuestionVisible={reportQuestionVisible}
+        setReportQuestionVisible={setReportQuestionVisible}
+        reportEndVisible={reportEndVisible}
+        setReportEndVisible={setReportEndVisible}
+      />
 
       <View
         style={{
@@ -90,7 +123,7 @@ const ForumHome = () => {
       <FlatList<IQuestionService.Fetch.Response['questions'][0]>
         data={query.data?.data?.questions.filter((q) => q.status === QuestionStatuses.OPEN) || []}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <CardItem item={item} />}
+        renderItem={({ item }) => <CardItem item={item} setReportModalVisible={setReportModalVisible} />}
         ListEmptyComponent={() =>
           query.isFetching ? (
             <Box className="min-w-full flex flex-col gap-2 ">
@@ -168,8 +201,10 @@ const ForumHome = () => {
 
 const CardItem = ({
   item,
+  setReportModalVisible,
 }: {
   item: IQuestionService.Fetch.Response['questions'][0];
+  setReportModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [error, setError] = useState<string | null>(null);
 
@@ -231,12 +266,14 @@ const CardItem = ({
           >
             {item.urgency === QuestionUrgencies.HIGH && (
               <View style={styles.urgentTag}>
-                <Text style={styles.urgentText}>Urgente</Text>
+                <Text style={styles.urgentText}>!</Text>
               </View>
             )}
             {auth.student.id !== item.student.id && (
               <>
-                <Balloon />
+                <TouchableOpacity onPress={handleReply}>
+                  <Balloon />
+                </TouchableOpacity>
 
                 <TouchableOpacity onPress={onOpenModal}>
                   <MaterialIcons
@@ -298,7 +335,7 @@ const CardItem = ({
                 )}
               </TouchableOpacity>
               <Box className="w-full h-px bg-gray-300" />
-              <TouchableOpacity
+              <TouchableOpacity onPress={() => { setReportModalVisible(true); onModalClose(); }}
                 className="w-full p-4 items-center"
               >
                 <Text size="lg" className="font-raleway-bold">
@@ -378,20 +415,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Itim_400Regular',
   },
-  subject: { fontSize: 14, color: '#666', fontFamily: 'Itim_400Regular', maxWidth: '95%' },
+  subject: { fontSize: 14, color: '#666', fontFamily: 'Itim_400Regular', maxWidth: '65%' },
   urgentTag: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#F5F6FA',
     borderRadius: 16,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginLeft: 16,
   },
-  urgentText: { color: '#fff', fontSize: 13, fontFamily: 'Itim_400Regular' },
+  urgentText: { color: '#FF0000', fontSize: 20, fontFamily: 'Itim_400Regular' },
   text: {
     fontSize: 14,
     color: '#333',
     marginVertical: 10,
     fontFamily: 'Raleway_400Regular',
+
   },
   readMore: {
     fontSize: 13,
