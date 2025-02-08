@@ -9,7 +9,7 @@ const StarGold: React.FC<StarProps> = ({ size = 32, ...props }) => {
   return (
     <Svg
       width={size}
-      height={size} // 🟢 Agora o tamanho é dinâmico
+      height={size} 
       viewBox="0 0 32 31"
       fill="none"
       {...props}
