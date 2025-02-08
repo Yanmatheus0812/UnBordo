@@ -234,7 +234,7 @@ const CardItem = ({
                 <Text style={styles.urgentText}>!</Text>
               </View>
             )}
-            {auth.student.id === item.student.id && (
+            {auth.student.id !== item.student.id && (
               <>
                 <Balloon />
 
