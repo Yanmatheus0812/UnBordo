@@ -13,9 +13,11 @@ export const AuthService = {
   },
 
   me: async (token?: string) => {
-    return api.get<IAuthService.Me.Response>(`/student/me`, {
+    const result = api.get<IAuthService.Me.Response>(`/student/me`, {
       ...(token && { headers: { Authorization: `Bearer ${token}` } }),
     });
+    console.log(result)
+    return result;
   },
 
   requestRecoveryPasswordCode: async (

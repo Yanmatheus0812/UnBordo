@@ -118,8 +118,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     await AsyncStorage.removeItem('unbordo@token');
     await AsyncStorage.removeItem('unbordo@student');
 
-    if(socket) {
-      socket.emit('disconnect');
+    if (socket) {
+      // To-do: hang-up on emit disconnect.
+      //socket.emit('disconnect');
       socket.disconnect();
     }
 

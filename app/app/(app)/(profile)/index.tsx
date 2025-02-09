@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Switch, StyleSheet, TouchableOpacity, Image, Modal } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Redirect, Tabs, useRouter } from 'expo-router';
 import { Button, ButtonText } from '@/components/ui/button';
 import EditableInput from '@/components/ui/profileInput/EditableInput';
 import NonEditableInput from '@/components/ui/profileInput/NonEditableInput';
 import ProfileHeaderComponent from '@/components/ui/ProfileHeader';
 import Coin from '@/assets/images/coin';
 import { Select } from '@/components/ui/select';
+import { useUnBordo } from '@/hooks/unbordo';
 
 
 
@@ -24,9 +25,9 @@ const usuario = {
   perguntas: 10,
 };
 
-
-
 const PerfilScreen = () => {
+
+  const { auth } = useUnBordo();
 
   const handleSwitchChange = (value: boolean) => {
     if (!value) {
@@ -45,9 +46,11 @@ const PerfilScreen = () => {
     setModalVisible(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setModalLogoutVisible(false);
-    while (router.canGoBack()) router.back()
+    await auth.unauthenticate();
+    // leave this stack.screen
+    router.push('/');
   }
 
   const handleSave = () => {
