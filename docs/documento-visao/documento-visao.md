@@ -20,6 +20,7 @@
 | **24/11/2024** | 0.1    | Primeira versão do documento | David, Gabriel, João e Sophia |
 | **13/12/2024** | 0.2    | Atualização do documento | Sophia |
 | **26/01/2025** | 0.3    | Atualização das Sprints, backlog e gamificação | Sophia |
+| **14/02/2025** | 0.4    | Atualização do cronograma e ajustes | Sophia |
 
 
 ## **VISÃO GERAL DO PRODUTO**
@@ -106,9 +107,11 @@ O XP será utilizado devido a ferramentas como o *pair programming*, visto que i
 Figura 2: Ciclo de vida do projeto
 </center>
 
-Durante o desenvolvimento desse projeto utilizaremos a metodologia ágil SCRUM e os métodos de desenvolvimento do Extreme Programming (XP). Nesse contexto, a utilização desses dois frameworks surge na necessidade estratégica de guiar o gerenciamento do trabalho e a execução técnica das atividades. O SCRUM prioriza a organização da equipe por meio de sprints, reuniões, revisões e retrospectivas, enquanto XP adiciona práticas de engenharia como programação em pares, testes e integração contínua, visando garantir a qualidade técnica no desenvolvimento.  
+Durante o desenvolvimento desse projeto utilizaremos a metodologia ágil SCRUM e os métodos de desenvolvimento do Extreme Programming (XP). Nesse contexto, a utilização desses dois frameworks surge na necessidade estratégica de guiar o gerenciamento do trabalho e a execução técnica das atividades. O SCRUM prioriza a organização da equipe por meio de sprints, reuniões, revisões e retrospectivas, enquanto XP adiciona práticas de engenharia como programação em pares, testes e integração contínua, visando garantir a qualidade técnica no desenvolvimento. 
+
 Essas metodologias são fundamentadas por guias consolidados, como o Scrum Guide e XP Programming Guide, que servem como referências para implementar suas abordagens.  
-Para apoiar essas práticas, ferramentas como o Github — que é uma plataforma de controle de versão e colaboração — traz um papel fundamental. O Github facilita a organização do código, rastreamento de problemas e a integração contínua, permitindo que a equipe trabalhe de forma eficiente e integrada. Além disso, o uso de tecnologias e técnicas modernas e as pipelines de integração contínua e entrega contínua (CI/CD) asseguram o processo de desenvolvimento ágil, iterativo e de alta qualidade.  
+Para apoiar essas práticas, ferramentas como o Github — que é uma plataforma de controle de versão e colaboração — traz um papel fundamental. O Github facilita a organização do código, rastreamento de problemas e a integração contínua, permitindo que a equipe trabalhe de forma eficiente e integrada. Além disso, o uso de tecnologias e técnicas modernas e as pipelines de integração contínua e entrega contínua (CI/CD) asseguram o processo de desenvolvimento ágil, iterativo e de alta qualidade.
+
 Por fim, é notório que a utilização de todos esses frameworks combinam os valores e princípios da agilidade com ferramentas e práticas que promovem a entrega de valor incremental, permitindo que equipes adaptem-se rapidamente às mudanças e garantam qualidade e alinhamento com os objetivos do projeto.
 
 ### **Gamificação**
@@ -139,14 +142,14 @@ Tabela 2: Divisão de responsabilidades
 
 | _Sprint_ | _Produto (Entrega)_     | _Data Início_ | _Data Fim_ | _Entregável(eis)_                               | _Responsáveis_   | _% conclusão_ |
 | -------- | ----------------------- | ------------- | ---------- | ----------------------------------------------- | ---------------- | ------------- |
-| 1        | Definição do Produto    | 08/11/24      | 22/11/24   | Documento de requisitos                         | Equipe e Cliente | 50%           |
+| 1        | Definição do Produto    | 08/11/24      | 22/11/24   | Documento de requisitos                         | Equipe e Cliente | 100%           |
 | 2        | Planejamento do Projeto | 23/11/24      | 06/12/24   | Documento de visão e Plano Geral da Gamificação | Equipe           | 100%           |
-|3|Prototipação|03/12/24|18/12/24|Protótipo em Figma|Equipe Front-End||
-|4|Arquitetura|03/12/24|18/12/24|Documento de Arquitetura|Equipe Back-End e DevOps||
-|5|Cadastro e login de usuários|09/12/24|09/01/2025|API de cadastro e login no aplicativo|Equipe Back-End e Front-End||
-|6|Dúvidas e fórum|09/01/25|20/01/25|Fórum e dúvidas|Equipe Back-End e Front-End||
-|7|Chat entre perfis|20/01/25|02/02/25|Chat 1:1|Equipe Front-End e Back-End||
-|9|Sistema de avaliação e gamificação|02/02/2025|10/02/25|Implementação das avaliações, ranqueamento e temporada|Equipe Back-end e Front-End||
+|3|Prototipação|03/12/24|18/12/24|Protótipo em Figma|Equipe Front-End| 100%|
+|4|Arquitetura|03/12/24|18/12/24|Documento de Arquitetura|Equipe Back-End e DevOps|100%|
+|5|Cadastro e login de usuários|09/12/24|09/01/2025|API de cadastro e login no aplicativo|Equipe Back-End e Front-End|100%|
+|6|Dúvidas e fórum|09/01/25|20/01/25|Fórum e dúvidas|Equipe Back-End e Front-End|100%|
+|7|Chat entre perfis|20/01/25|02/02/25|Chat 1:1|Equipe Front-End e Back-End|100%|
+|9|Sistema de avaliação e gamificação|02/02/2025|16/02/25|Implementação das avaliações, ranqueamento e temporada|Equipe Back-end e Front-End|80%|
 
 
 ### **Matriz de Comunicação**
@@ -155,11 +158,11 @@ Tabela 2: Divisão de responsabilidades
 
 | Descrição                                                                         | Área/Envolvidos | Periodicidade         | Produtos Gerados                                                                             |
 | :-------------------------------------------------------------------------------- | :-------------- | :-------------------- | :------------------------------------------------------------------------------------------- |
-| Validação de requisitos                                                           | Cliente Equipe  | Sempre que necessário | Documento de requisitos e gamificação.                                                       |
+| Validação de requisitos                                                           | Cliente e Equipe  | Sempre que necessário | Documento de requisitos e gamificação.                                                       |
 | Acompanhamento das atividades; Acompanhamento dos compromissos e ações pendentes. | Equipe          | Semanal               | Ata de reunião; Relatórios; Atividades a serem realizadas; Documento de visão e arquitetura. |
 |                                                                                   | Equipe          | Quinzenal             |                                                                                              |
-| Entrega de funcionalidade.                                                        | Cliente Equipe  | A cada sprint         | Ata de reunião.                                                                              |
-| Comunicar situação do projeto                                                     | Equipe Monitor  | Semanal               | Ata de reunião.                                                                              |
+| Entrega de funcionalidade.                                                        | Cliente e Equipe  | A cada sprint         | Ata de reunião.                                                                              |
+| Comunicar situação do projeto                                                     | Equipe e Monitor  | Sempre que necessário               | Ata de reunião.                                                                              |
 
 ### **Gerenciamento de Riscos**
 
@@ -223,7 +226,7 @@ A forma na qual foi feita a elicitação de requisitos foi através de uma reuni
 
 **Como sistema eu quero:**
 
-fora!! - Reiniciar a contagem de cancelamentos semanais que um aluno pode fazer de um bate-papo de dúvidas.(RQ05 \- SHOULD) 
+- Reiniciar a contagem de cancelamentos semanais que um aluno pode fazer de um bate-papo de dúvidas.(RQ05 \- SHOULD) 
 - Possuir um bate-papo privado para que os alunos tirem suas dúvidas entre si.(RQ06 MUST)
 - Buscar as matérias ofertadas na UnB/FCTE através de web-scraping.(RQ08 \- MUST)
 - Permitir os usuários a fazer denúncias em caso de comportamento impróprio de outro usuário na plataforma. (RQ15 \- COULD)
@@ -297,7 +300,7 @@ Tabela 6: Perfis de acesso
 | 17                                    |      1  | Cadastro                      |                   | Must        | Usuário se cadastra com nome, matrícula e curso (da FCTE).                                                                                                                                   |                                    |
 | 18                                    |     2   | Pontos por dificuldade        |                   | Could       | Aumentar as moedas das dúvidas de acordo com o nível de dificuldade.                                                                                                                         |                                    |
 | 19                                    |      4  | Recompensas                   |                   | Must        | Recompensar tutores com moedas de acordo com seu desempenho e participação.                                                                                                                  |                                    |
-| 20                                    |    4    | Perda de moedas               |                   | Could       | Tutores perdem moedas conforme a avaliação ruim de um aluno sobre seu atendimento.                                                                                                           |                                    |
+| 20                                    |    4    | Diminuição da avaliação               |                   | Could       |  Tutores tem diminuição da sua média de avaliação reduzida conforme a avaliação baixa de um aluno sobre seu atendimento                                                                                                           |                                    |
 | 21                                    |    3    | Alerta                        |                   | Should      | Enviar e-mail para o usuário denunciado para alertar sobre denúncias de comportamento impróprio.                                                                                             |                                    |
 | 22                                    |     1   | Deletar conta                 |                   | Must        | O usuário pode deletar sua conta.                                                                                                                                                            |                                    |
 | 23                                    |     3   | Visualizar chats              |                   | Could       | O sistema deve manter os chats privados dos usuários.                                                                                                                                        |                                    |
