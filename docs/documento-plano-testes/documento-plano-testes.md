@@ -10,6 +10,7 @@
 | :----: | :--: | :--------------------: | :-------------------: |
 | 0.5 | 29/01/2025 | Atualizar template | João Farias |
 | 0.6 | 10/02/2025 | Atualização das seções 2 e 3 | Willian Silva |
+| 0.7 | 16/02/2025 | Revisão preliminar | Willian Silva |
 
 ## 1 - Introdução
 
@@ -259,7 +260,7 @@ Caso seja necessário, liste aqui os requisitos a testar subdivididos em casos d
             <td>O usuário denunciado recebe um aviso por e-mail sobre a denúncia.</td>
         </tr>
         <tr>
-            <td>Exclusão de Conta</td>
+            <td>Exclusão de conta</td>
             <td>RQ24</td>
             <td>
                 1. Acessar as configurações de conta<br>
@@ -368,7 +369,7 @@ São responsáveis por verificar a menor unidade testável do sistema, como as f
             Objetivo
         </th>
         <th colspan="4">
-            Verificar se o sistema é capaz de suportar a carga de usuários simultâneos.
+            Verificar a lógica do caso do usuário de cadastro.
         </th>
     </tr>
     <tr>
@@ -376,27 +377,10 @@ São responsáveis por verificar a menor unidade testável do sistema, como as f
             Técnica:
         </th>
         <th colspan="2">
-            (x) manual
+            () manual
         </th>
         <th colspan="2">
-            ( ) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração ( )
-        </th>
-        <th>
-            Sistema (x)
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
+            (x) automática
         </th>
     </tr>
     <tr>
@@ -415,15 +399,703 @@ São responsáveis por verificar a menor unidade testável do sistema, como as f
             Responsável(is)
         </th>
         <th colspan="4">
-            Backend
+            Back-end
         </th>
     </tr>
 </table>
 <br/>
 
-### 3.2 - Testes funcionais
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Verificar a lógica do caso do usuário de login.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
 
-Para testes funcionais.
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Verificar a lógica da autenticação do usuário.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Verificar a lógica da criação da dúvida do aluno no fórum.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Verificar a lógica da remoção da dúvida do aluno no fórum.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Verificar a lógica de pesquisar todas as perguntas no fórum.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a lógica de filtrar uma pergunta.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a geração do JWT Web Token.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação do caso de usuário do login.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação do caso de usuário do registro.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação da criação da dúvida.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação da remoção da dúvida. 
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação da busca das dúvidas filtradas.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação da busca de uma dúvida.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a busca de matérias através do SIGAA.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a validação da urgência da dúvida.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a função que gera e envia o e-mail.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+### 3.2 - Testes de integração
+
+Para testes de integração.
 Possuem a responsabilidade de verificar se o sistema atende aos requisitos especificados. Esses testes consideram a interação entre diferentes componentes do sistema por intermédio de suas integrações.
 
 <br/>
@@ -433,7 +1105,7 @@ Possuem a responsabilidade de verificar se o sistema atende aos requisitos espec
             Objetivo
         </th>
         <th colspan="4">
-            Verificar se o sistema é capaz de suportar a carga de usuários simultâneos.
+           Verificar a rota de login da aplicação.
         </th>
     </tr>
     <tr>
@@ -441,27 +1113,10 @@ Possuem a responsabilidade de verificar se o sistema atende aos requisitos espec
             Técnica:
         </th>
         <th colspan="2">
-            (x) manual
+            () manual
         </th>
         <th colspan="2">
-            ( ) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração ( )
-        </th>
-        <th>
-            Sistema (x)
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
+            (x) automática
         </th>
     </tr>
     <tr>
@@ -480,16 +1135,11 @@ Possuem a responsabilidade de verificar se o sistema atende aos requisitos espec
             Responsável(is)
         </th>
         <th colspan="4">
-            Backend
+            Back-end
         </th>
     </tr>
 </table>
 <br/>
-
-### 3.3 - Testes de carga
-
-Para teste de carga.
-Deve-se avaliar a capacidade do sistema em lidar com um número crescente de usuários ou operações simultâneas. Ademais, é importante identificar o ponto em que o desempenho começa a degradar, por meio do tempo de resposta, uso de recursos e de vfalhas em potencial.
 
 <br/>
 <table>
@@ -498,7 +1148,7 @@ Deve-se avaliar a capacidade do sistema em lidar com um número crescente de usu
             Objetivo
         </th>
         <th colspan="4">
-            Verificar se o sistema é capaz de suportar a carga de usuários simultâneos.
+           Verificar a rota de cadastro da aplicação.
         </th>
     </tr>
     <tr>
@@ -506,27 +1156,10 @@ Deve-se avaliar a capacidade do sistema em lidar com um número crescente de usu
             Técnica:
         </th>
         <th colspan="2">
-            (x) manual
+            () manual
         </th>
         <th colspan="2">
-            ( ) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração ( )
-        </th>
-        <th>
-            Sistema (x)
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
+            (x) automática
         </th>
     </tr>
     <tr>
@@ -545,17 +1178,11 @@ Deve-se avaliar a capacidade do sistema em lidar com um número crescente de usu
             Responsável(is)
         </th>
         <th colspan="4">
-            Backend
+            Back-end
         </th>
     </tr>
 </table>
 <br/>
-
-### 3.4 - Teste de segurança e controle de acesso
-
-Para teste de integridade de dados e do banco de dados.
-Aqui deve-se verificar se os dados não se perdem ao desligar o programa. Se o programa consegue se recuperar em caso de falha ou fechamento repentino.
-Se possível usar teste automatizado.
 
 <br/>
 <table>
@@ -564,7 +1191,7 @@ Se possível usar teste automatizado.
             Objetivo
         </th>
         <th colspan="4">
-            Verificar se dados são mantidos após súbito desligamento do programa .
+           Verificar a criação do repositório de dúvidas no banco de dados.
         </th>
     </tr>
     <tr>
@@ -572,92 +1199,10 @@ Se possível usar teste automatizado.
             Técnica:
         </th>
         <th colspan="2">
-            (x) manual
+            () manual
         </th>
         <th colspan="2">
             (x) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração ( )
-        </th>
-        <th>
-            Sistema (x)
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Abordagem do teste
-        </th>
-        <th colspan="2">
-            Caixa branca ( )
-        </th>
-        <th colspan="2">
-            Caixa preta (x)
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Responsável(is)
-        </th>
-        <th colspan="4">
-            Programador(es) ou equipe de testes
-        </th>
-    </tr>
-</table>
-<br/>
-
-### 3.5 - Teste de instalação
-
-Para teste de instalação.
-É verificado se o software pode ser corretamente instalado, configurado e executado no ambiente de destino. Além disso, é avaliado se todas as dependências são satisfeitas, se houve a alocação correta dos arquivose e se o sistema inicia sem erros após a instalação.
-
-<br/>
-<table>
-    <tr>
-        <th>
-            Objetivo
-        </th>
-        <th colspan="4">
-            descreva aqui o objetivo
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Técnica:
-        </th>
-        <th colspan="2">
-            (x) manual
-        </th>
-        <th colspan="2">
-            (x) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração (x)
-        </th>
-        <th>
-            Sistema ( )
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
         </th>
     </tr>
     <tr>
@@ -668,7 +1213,7 @@ Para teste de instalação.
             Caixa branca (x)
         </th>
         <th colspan="2">
-            Caixa preta (x)
+            Caixa preta ( )
         </th>
     </tr>
     <tr>
@@ -676,13 +1221,228 @@ Para teste de instalação.
             Responsável(is)
         </th>
         <th colspan="4">
-            Programador(es) ou equipe de testes
+            Back-end
         </th>
     </tr>
 </table>
 <br/>
 
-### 3.6 - Teste de sistema
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a remoção do repositório de dúvidas no banco de dados.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a criação do repositório de alunos no banco de dados.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar a remoção do repositório de alunos no banco de dados.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            () manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar se a denúncia é registrada e notifica o denunciado.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            (x) manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Front-end & Back-end 
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+           Verificar se os históricos dos chats são corretamente armazenados.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            (x) manual
+        </th>
+        <th colspan="2">
+            (x) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca (x)
+        </th>
+        <th colspan="2">
+            Caixa preta ( )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Front-end & Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+### 3.3 - Teste de sistema
 
 Para teste de sistema.
 Tem como objetivo validar o funcionamento completo do software,através da garantia de que todos os componentes interajam corretamente e que os requisitos especificados sejam atendidos.
@@ -694,7 +1454,7 @@ Tem como objetivo validar o funcionamento completo do software,através da garan
             Objetivo
         </th>
         <th colspan="4">
-            descreva aqui o objetivo
+            Instalação: Verificar se o software pode ser corretamente instalado, configurado e executado no ambiente de destino.
         </th>
     </tr>
     <tr>
@@ -702,27 +1462,10 @@ Tem como objetivo validar o funcionamento completo do software,através da garan
             Técnica:
         </th>
         <th colspan="2">
-            ( ) manual
+            ( x ) manual
         </th>
         <th colspan="2">
             ( ) automática
-        </th>
-    </tr>
-    <tr>
-        <th>
-            Estágio do teste
-        </th>
-        <th>
-            Integração ( )
-        </th>
-        <th>
-            Sistema ( )
-        </th>
-        <th>
-            Unidade ( )
-        </th>
-        <th>
-            Aceitação ( )
         </th>
     </tr>
     <tr>
@@ -733,7 +1476,7 @@ Tem como objetivo validar o funcionamento completo do software,através da garan
             Caixa branca ( )
         </th>
         <th colspan="2">
-            Caixa preta ( )
+            Caixa preta ( x )
         </th>
     </tr>
     <tr>
@@ -741,21 +1484,235 @@ Tem como objetivo validar o funcionamento completo do software,através da garan
             Responsável(is)
         </th>
         <th colspan="4">
-            Programador(es) ou equipe de testes
+            DevOps
         </th>
     </tr>
 </table>
 <br/>
 
-### 3.7 - Critérios de Finalização dos Testes
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Integridade de dados e do banco de dados: Verificar se os dados não se perdem ao desligar o programa.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            ( x ) manual
+        </th>
+        <th colspan="2">
+            ( ) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca ( )
+        </th>
+        <th colspan="2">
+            Caixa preta ( x )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            DevOps
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Desempenho: Verificar os níveis de escalabilidade que o sistema suporta.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            ( x ) manual
+        </th>
+        <th colspan="2">
+            ( ) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca ( )
+        </th>
+        <th colspan="2">
+            Caixa preta ( x )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            DevOps
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Interface do usuário: Verificar a experiência visual e interativa do usuário. 
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            ( x ) manual
+        </th>
+        <th colspan="2">
+            ( ) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca ( )
+        </th>
+        <th colspan="2">
+            Caixa preta ( x )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Front-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Compatibilidade: Verificar se o sistema funciona em diferentes dispositivos mobile.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            ( x ) manual
+        </th>
+        <th colspan="2">
+            ( ) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca ( )
+        </th>
+        <th colspan="2">
+            Caixa preta ( x )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Front-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+<br/>
+<table>
+    <tr>
+        <th>
+            Objetivo
+        </th>
+        <th colspan="4">
+            Gamificação: Verificar se a pontuação, o ranking e o perfil dos usuários são acessados.
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Técnica:
+        </th>
+        <th colspan="2">
+            ( x ) manual
+        </th>
+        <th colspan="2">
+            ( ) automática
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Abordagem do teste
+        </th>
+        <th colspan="2">
+            Caixa branca ( )
+        </th>
+        <th colspan="2">
+            Caixa preta ( x )
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Responsável(is)
+        </th>
+        <th colspan="4">
+            Front-end & Back-end
+        </th>
+    </tr>
+</table>
+<br/>
+
+### 3.4 - Critérios de Finalização dos Testes
 
 A respeito dos critérios de finalização dos testes, é importante que sejam cumpridos os seguintes itens:
 
 <ul>
     <li>Todos os testes unitários atingirem uma cobertura mínima de 90%.</li>
     <li>Os testes de integração validarem a comunicação correta entre os módulos.</li>
-    <li>Os testes funcionais garantirem que todas as funcionalidades essenciais operam corretamente.</li>
-    <li>O desempenho do sistema atender aos limites estabelecidos para tempo de resposta e carga simultânea.</li>
+    <li>Os testes de sistema garantirem que todas as funcionalidades essenciais operem corretamente.</li>
     <li>As verificações de segurança não identificarem vulnerabilidades críticas.</li>
 </ul>
 
@@ -765,7 +1722,7 @@ A respeito dos critérios de finalização dos testes, é importante que sejam c
 
 ### 4.1 - Ambiente de teste - Software e Hardware
 
-De software, utilizamos Node.js para o backend e React para o frontend; o próprio React faz testes em questão de renderização de componentes e telas.
+De software, utilizamos Node.js para o back-end e React para o front-end; o próprio React faz testes em questão de renderização de componentes e telas.
 
 Para o servidor, utilizamos o Render para fazer deploy que por si só faz testes para manter o servidor rodando apesar de falhas, ele também possui um endpoint para checar se o servidor está online.
 
