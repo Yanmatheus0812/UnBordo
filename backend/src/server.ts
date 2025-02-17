@@ -10,7 +10,7 @@ import { prisma } from './infra/orm/prisma/datasource';
 import { BullMQ } from './messsaging/bullmq';
 import { Socket } from './messsaging/socket';
 
-export const notification_devices : Array<string> = [];
+export const notification_devices : Set<string> = new Set();
 
 export function apiProvider() {
   return http.createServer(api).listen(env.PORT, '0.0.0.0', () => {
