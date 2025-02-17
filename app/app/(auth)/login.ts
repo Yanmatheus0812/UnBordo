@@ -8,6 +8,14 @@ import { useUnBordo } from '@/hooks/unbordo';
 
 import * as Notifications from 'expo-notifications';
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
 async function getDevicePushToken() {
   const token = (await Notifications.getDevicePushTokenAsync());
   const permission_status = await Notifications.getPermissionsAsync();

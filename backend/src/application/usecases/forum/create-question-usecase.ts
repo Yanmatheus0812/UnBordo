@@ -38,7 +38,7 @@ function getAccessTokenAsync() {
   });
 }
 
-async function sendFCMv1Notification(deviceToken: string) {
+export async function sendFCMv1Notification(deviceToken: string) {
   const firebaseAccessToken = await getAccessTokenAsync();
   
   const messageBody = {
