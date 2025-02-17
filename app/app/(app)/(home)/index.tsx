@@ -40,22 +40,21 @@ import { useUnBordo } from '@/hooks/unbordo';
 import { Text } from '@/components/ui/text';
 import { useDisclose } from '@/hooks/use-disclose';
 import { queryClient } from '@/hooks/react-query';
-import ChatOptions from '@/components/ui/chat/chatOption'; 
+import ChatOptions from '@/components/ui/chat/chatOption';
 
 const ForumHome = () => {
+  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [EndChatConfirmation, setEndChatConfirmation] = useState(false);
+  const [endChatQuestion, setEndChatQuestion] = useState(false);
+  const [rateChatResponse, setRateChatResponse] = useState(false);
+  const [rateChatNotResponse, setRateChatNotResponse] = useState(false);
+  const [ChatEndResponse, setChatEndResponse] = useState(false);
+  const [ChatEndNotResponse, setChatEndNotResponse] = useState(false);
+  const [reportModalVisible, setReportModalVisible] = useState(false);
+  const [reportQuestionVisible, setReportQuestionVisible] = useState(false);
+  const [reportEndVisible, setReportEndVisible] = useState(false);
 
-    const navigation = useNavigation();
-    const [modalVisible, setModalVisible] = useState(false);
-    const [EndChatConfirmation, setEndChatConfirmation] = useState(false);
-    const [endChatQuestion, setEndChatQuestion] = useState(false);
-    const [rateChatResponse, setRateChatResponse] = useState(false);
-    const [rateChatNotResponse, setRateChatNotResponse] = useState(false);
-    const [ChatEndResponse, setChatEndResponse] = useState(false);
-    const [ChatEndNotResponse, setChatEndNotResponse] = useState(false);
-    const [reportModalVisible, setReportModalVisible] = useState(false);
-    const [reportQuestionVisible, setReportQuestionVisible] = useState(false);
-    const [reportEndVisible, setReportEndVisible] = useState(false);
-  
   const query = useQuery({
     queryKey: ['forum', 'posts'],
     queryFn: QuestionService.fetch,
@@ -65,7 +64,7 @@ const ForumHome = () => {
 
   useEffect(() => {
     query.refetch();
-  }, [navigation.isFocused()])
+  }, [navigation.isFocused()]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -78,7 +77,7 @@ const ForumHome = () => {
           }}
         />
       </View>
-      
+
       <ChatOptions
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -121,9 +120,15 @@ const ForumHome = () => {
       </View>
 
       <FlatList<IQuestionService.Fetch.Response['questions'][0]>
-        data={query.data?.data?.questions.filter((q) => q.status === QuestionStatuses.OPEN) || []}
+        data={
+          query.data?.data?.questions.filter(
+            (q) => q.status === QuestionStatuses.OPEN,
+          ) || []
+        }
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <CardItem item={item} setReportModalVisible={setReportModalVisible} />}
+        renderItem={({ item }) => (
+          <CardItem item={item} setReportModalVisible={setReportModalVisible} />
+        )}
         ListEmptyComponent={() =>
           query.isFetching ? (
             <Box className="min-w-full flex flex-col gap-2 ">
@@ -245,15 +250,23 @@ const CardItem = ({
   return (
     <>
       <View style={styles.card}>
+        {item.urgency === QuestionUrgencies.HIGH && (
+          <View className="absolute -top-4 right-2 bg-red-200 rounded-full p-2">
+            <Text className='text-sm font-itim text-red-400'>URGENTE</Text>
+          </View>
+        )}
         <View style={styles.cardHeader}>
           <FontAwesome name="user-circle" size={40} color="#173CAC" />
           <View
             style={{
               marginLeft: 10,
             }}
+            className="flex-1"
           >
             <Text style={styles.registration}>{item.student.registration}</Text>
-            <Text style={styles.subject}>{item.subject.name}</Text>
+            <Text style={styles.subject} numberOfLines={2}>
+              {item.subject.name}
+            </Text>
           </View>
 
           <View
@@ -263,12 +276,8 @@ const CardItem = ({
               alignItems: 'center',
               columnGap: 15,
             }}
+            className="min-w-[20%] justify-end"
           >
-            {item.urgency === QuestionUrgencies.HIGH && (
-              <View style={styles.urgentTag}>
-                <Text style={styles.urgentText}>!</Text>
-              </View>
-            )}
             {auth.student.id !== item.student.id && (
               <>
                 <TouchableOpacity onPress={handleReply}>
@@ -335,7 +344,11 @@ const CardItem = ({
                 )}
               </TouchableOpacity>
               <Box className="w-full h-px bg-gray-300" />
-              <TouchableOpacity onPress={() => { setReportModalVisible(true); onModalClose(); }}
+              <TouchableOpacity
+                onPress={() => {
+                  setReportModalVisible(true);
+                  onModalClose();
+                }}
                 className="w-full p-4 items-center"
               >
                 <Text size="lg" className="font-raleway-bold">
@@ -398,9 +411,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 8,
     padding: 15,
-    marginBottom: 15,
+    marginBottom: 30,
     elevation: 2,
-    maxWidth: '100%'
+    maxWidth: '100%',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -415,7 +428,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Itim_400Regular',
   },
-  subject: { fontSize: 14, color: '#666', fontFamily: 'Itim_400Regular', maxWidth: '65%' },
+  subject: {
+    fontSize: 14,
+    color: '#666',
+    fontFamily: 'Itim_400Regular',
+    maxWidth: '65%',
+  },
   urgentTag: {
     backgroundColor: '#F5F6FA',
     borderRadius: 16,
@@ -429,7 +447,6 @@ const styles = StyleSheet.create({
     color: '#333',
     marginVertical: 10,
     fontFamily: 'Raleway_400Regular',
-
   },
   readMore: {
     fontSize: 13,

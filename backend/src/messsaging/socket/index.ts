@@ -9,63 +9,20 @@ export class Socket {
   private socketIdToStudent: any = {};
 
   private constructor(server: Server) {
-    // private constructor
     this.io = server;
 
-    // console.log(this.io);
     logger.info('Socket is up!!!');
-
-    this.io.attachApp({ // Connection state recovery must be enabled by the server - não sei se esse meetodo atachApp e usado certo, na documentacao do socket.io ele criava um novo server...
-      connectionStateRecovery: {
-        // the backup duration of the sessions and the packets
-        maxDisconnectionDuration: 2 * 60 * 1000,
-        // whether to skip middlewares upon successful recovery
-        skipMiddlewares: true,
-      },
-    });
 
     this.io.on('connection', (socket) => {
       logger.info('a user connected');
 
-      // socket.on('join', (student: any) => {
-      //   console.log(socket.handshake.auth);
-
-      //   this.students[student.id] = {
-      //     socketId: socket.id,
-      //     socket,
-      //     student,
-      //   };
-
-      //   this.socketIdToStudent[socket.id] = student.id;
-
-      //   // this.users[user.id] = {
-      //   //   socketId: socket.id,
-      //   //   socket: socket,
-      //   //   user,
-      //   // };
-
-      //   // this.socketIdUserId[socket.id] = user.id;
-      // });
       if (!socket.recovered) {
         Object.keys(receivers).forEach((receiver) => {
           socket.on(receiver, receivers[receiver](socket));
         });
       } else {
-        // recovery was successful: socket.id, socket.rooms and socket.data were restored
+        logger.info('recovered');
       }
-      // socket.on('send-message', (message) => {
-      //   console.log(message);
-
-      //   const studentId = this.socketIdToStudent[socket.id];
-
-      //   if (studentId) {
-      //     const student = this.students[studentId];
-
-      //     if (student) {
-      //       student.socket.emit('message', message);
-      //     }
-      //   }
-      // });
 
       socket.on('disconnect', () => {
         const userId = this.socketIdToStudent[socket.id];
@@ -74,7 +31,6 @@ export class Socket {
           delete this.students[userId];
           delete this.socketIdToStudent[socket.id];
         }
-        console.log('user disconnected');
       });
     });
   }
@@ -118,9 +74,6 @@ export class Socket {
     };
 
     this.instance.socketIdToStudent[socket.id] = student.id;
-
-    console.log(this.instance.students);
-    console.log(this.instance.socketIdToStudent);
   }
 
   public static removeStudent(socket: any) {

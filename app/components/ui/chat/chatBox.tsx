@@ -6,9 +6,6 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Modal,
-  Button,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import ChatOptions from '@/components/ui/chat/chatOption'; 
 
@@ -17,6 +14,7 @@ interface ChatBoxProps {
   message?: string;
   userImage?: string;
   onPress: () => void; // Função para abrir o chat
+  chatId: string;
 }
 
 export default function ChatBox({
@@ -24,6 +22,7 @@ export default function ChatBox({
   message,
   userImage,
   onPress,
+  chatId,
 }: ChatBoxProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [EndChatConfirmation, setEndChatConfirmation] = useState(false);
@@ -45,9 +44,9 @@ export default function ChatBox({
       )}
       <View style={styles.textContainer}>
         <Text style={styles.name}>{username}</Text>
-        {/* <Text style={styles.message} numberOfLines={1}>
+        <Text style={styles.message} numberOfLines={1}>
           {message}
-        </Text> */}
+        </Text>
       </View>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         <Text style={styles.options}>...</Text>
@@ -74,6 +73,7 @@ export default function ChatBox({
         setReportQuestionVisible={setReportQuestionVisible}
         reportEndVisible={reportEndVisible}
         setReportEndVisible={setReportEndVisible}
+        chatId={chatId}
       />
     </TouchableOpacity>
   );

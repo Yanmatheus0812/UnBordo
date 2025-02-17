@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Switch, StyleSheet, TouchableOpacity, Image, Modal } from 'react-native';
-import { Redirect, Tabs, useRouter } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  Switch,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
+import { useRouter } from 'expo-router';
 import { Button, ButtonText } from '@/components/ui/button';
 import EditableInput from '@/components/ui/profileInput/EditableInput';
 import NonEditableInput from '@/components/ui/profileInput/NonEditableInput';
@@ -8,8 +16,19 @@ import ProfileHeaderComponent from '@/components/ui/ProfileHeader';
 import Coin from '@/assets/images/coin';
 import { Select } from '@/components/ui/select';
 import { useUnBordo } from '@/hooks/unbordo';
+import { useQuery } from '@tanstack/react-query';
+import { AuthService } from '@/http/services/auth';
+import { Controller, useForm } from 'react-hook-form';
+import { Skeleton, SkeletonText } from '@/components/ui/skeleton';
+import { Box } from '@/components/ui/box';
 
-
+interface IFormInputs {
+  name: string;
+  course: string;
+  email: string;
+  registration: string;
+  rankingParticipant: boolean;
+}
 
 // Simulação de um usuário
 const usuario = {
@@ -26,14 +45,37 @@ const usuario = {
 };
 
 const PerfilScreen = () => {
-
   const { auth } = useUnBordo();
+  const { data, isFetching } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => AuthService.me(),
+  });
+
+  const { control, setValue, getValues, watch } = useForm<IFormInputs>({
+    defaultValues: {
+      name: data?.data?.student?.name,
+      course: data?.data?.student?.course,
+      email: data?.data?.student?.email,
+      registration: data?.data?.student?.registration,
+      rankingParticipant: data?.data?.student?.rankingParticipant,
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      setValue('name', data.data.student.name);
+      setValue('course', data.data.student.course);
+      setValue('email', data.data.student.email);
+      setValue('registration', data.data.student.registration);
+      setValue('rankingParticipant', data.data.student.rankingParticipant);
+    }
+  }, [data]);
 
   const handleSwitchChange = (value: boolean) => {
     if (!value) {
       setModalVisible(true);
     } else {
-      setParticiparRanking(value);
+      setValue('rankingParticipant', value);
     }
   };
 
@@ -42,7 +84,7 @@ const PerfilScreen = () => {
   };
 
   const confirmSwitchChange = () => {
-    setParticiparRanking(false);
+    setValue('rankingParticipant', false);
     setModalVisible(false);
   };
 
@@ -50,8 +92,11 @@ const PerfilScreen = () => {
     setModalLogoutVisible(false);
     await auth.unauthenticate();
     // leave this stack.screen
-    router.push('/');
-  }
+    router.push({
+      // @ts-ignore
+      pathname: '/(auth)',
+    });
+  };
 
   const handleSave = () => {
     setIsEditingNome(false);
@@ -64,13 +109,9 @@ const PerfilScreen = () => {
     setIsEditingNome(false);
     setIsEditingCurso(false);
   };
-  
 
-  const [nome, setNome] = useState(usuario.nome);
   const [curso, setCurso] = useState(usuario.curso);
-  const [email, setEmail] = useState(usuario.email);
-  const [matricula, setMatricula] = useState(usuario.matricula);
-  const [participarRanking, setParticiparRanking] = useState(true);
+  // const [participarRanking, setParticiparRanking] = useState(true);
   const [isEditingNome, setIsEditingNome] = useState(false); // Estado para controlar a editabilidade do nome
   const [isEditingCurso, setIsEditingCurso] = useState(false); // Estado para controlar a editabilidade do curso
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal
@@ -79,9 +120,43 @@ const PerfilScreen = () => {
 
   const router = useRouter();
 
+  if (isFetching) {
+    return (
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <ProfileHeaderComponent
+          photoUri={require('@/assets/avatars/avatar1.webp')}
+          title={'Carregando...'}
+          onBackPress={() => router.back()}
+        />
+
+        <Box className="px-4">
+          <Box>
+            <Skeleton className="h-8 mt-12 rounded" speed={3} />
+            <Skeleton className="h-12 mt-12 rounded" speed={3} />
+            <Skeleton className="h-12 mt-5 rounded" speed={3} />
+            <Skeleton className="h-12 mt-5 rounded" speed={3} />
+            <Skeleton className="h-12 mt-5 rounded" speed={3} />
+          </Box>
+          <Box className="mt-8">
+            <SkeletonText className="h-10 mt-12 rounded" speed={3} />
+            <SkeletonText className="h-10 mt-12 rounded" speed={3} />
+          </Box>
+        </Box>
+      </ScrollView>
+    );
+  }
+
+  const studentData = data?.data?.student;
+  const rankingData = studentData?.ranking.length ? studentData.ranking[0] : undefined;
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
       {/* Header */}
       <ProfileHeaderComponent
         photoUri={usuario.avatar}
@@ -95,12 +170,18 @@ const PerfilScreen = () => {
           <Text style={styles.sectionTitle}>Informações Pessoais</Text>
         </View>
         <Text style={styles.sectionSubTitle}>Nome</Text>
-        <EditableInput
-          value={nome}
-          onChangeText={setNome}
-          placeholder="Nome"
-          editable={isEditingNome}
-          onEditPress={() => setIsEditingNome(!isEditingNome)}
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value } }) => (
+            <EditableInput
+              value={value}
+              onChangeText={onChange}
+              placeholder="Nome"
+              editable={isEditingNome}
+              onEditPress={() => setIsEditingNome(!isEditingNome)}
+            />
+          )}
         />
 
         {/* Curso */}
@@ -113,47 +194,84 @@ const PerfilScreen = () => {
           setModalVisible={setModalCursoVisible}
         >
           {/* Lista de opções */}
-          <TouchableOpacity onPress={() => { setCurso('Engenharias'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Engenharias');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharias</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setCurso('Engenharia Aeroespacial'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Engenharia Aeroespacial');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharia Aeroespacial</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setCurso('Ciência da Computação'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Ciência da Computação');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharia Automotiva</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setCurso('Engenharia de Energia'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Engenharia de Energia');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharia de Energia</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setCurso('Engenharia de Software'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Engenharia de Software');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharia de Software</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setCurso('Engenharia Eletrônica'); setModalCursoVisible(false); setIsEditingCurso(true); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setCurso('Engenharia Eletrônica');
+              setModalCursoVisible(false);
+              setIsEditingCurso(true);
+            }}
+          >
             <Text style={styles.optionText}>Engenharia Eletrônica</Text>
           </TouchableOpacity>
         </Select>
 
         <Text style={styles.sectionSubTitle}>Email</Text>
-        <NonEditableInput
-          value={email}
-          placeholder="Email"
-        />
+        <NonEditableInput value={getValues('email')} placeholder="Email" />
 
         <Text style={styles.sectionSubTitle}>Matrícula</Text>
         <NonEditableInput
-          value={matricula}
+          value={getValues('registration')}
           placeholder="Matrícula"
         />
 
         {(isEditingNome || isEditingCurso) && (
           <View style={styles.saveButtonContainer}>
             <TouchableOpacity onPress={handleCancel}>
-              <Button size="lg" variant='outline' style={{width: 150, marginRight: 30}}>
+              <Button
+                size="lg"
+                variant="outline"
+                style={{ width: 150, marginRight: 30 }}
+              >
                 <ButtonText>cancelar</ButtonText>
               </Button>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleSave}>
-              <Button size="lg" style={{width: 150}}>
+              <Button size="lg" style={{ width: 150 }}>
                 <ButtonText>Salvar</ButtonText>
               </Button>
             </TouchableOpacity>
@@ -166,15 +284,18 @@ const PerfilScreen = () => {
 
       <View style={styles.section}>
         <View style={styles.center}>
-          <Text style={styles.sectionTitle}>Gamificação</Text></View>
+          <Text style={styles.sectionTitle}>Gamificação</Text>
+        </View>
         <View style={styles.switchContainer}>
-          <Text style={{ fontSize: 18, fontFamily: 'Raleway_400Regular' }}>Desejo participar do ranking</Text>
+          <Text style={{ fontSize: 18, fontFamily: 'Raleway_400Regular' }}>
+            Desejo participar do ranking
+          </Text>
           <Switch
-            value={participarRanking}
+            value={watch('rankingParticipant')}
             onValueChange={handleSwitchChange}
             trackColor={{ false: '#9C9C9C', true: '#4CAF50' }} // Cor do fundo do switch
-            thumbColor={participarRanking ? '#fff' : '#fff'} // Cor da bolinha do switch
-            style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }} // Aumenta o tamanho do switch
+            thumbColor={watch('rankingParticipant') ? '#fff' : '#fff'} // Cor da bolinha do switch
+            style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }} // Aumenta o tafmanho do switch
           />
         </View>
       </View>
@@ -187,21 +308,27 @@ const PerfilScreen = () => {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Deseja desativar sua participação no ranking?</Text>
-            <Text style={styles.modalMessage}>Essa ação fará você perder sua posição atual</Text>
+            <Text style={styles.modalTitle} className="font-itim">
+              Deseja desativar sua participação no ranking?
+            </Text>
+            <Text style={styles.modalMessage} className="font-raleway">
+              Suas estatísticas não aparecerão mais na página de ranking.
+            </Text>
             <View style={styles.modalButtons}>
               <Button
                 size="lg"
-                variant='outline'
-                action='primary'
-                onPress={cancelSwitchChange}>
+                variant="outline"
+                action="primary"
+                onPress={cancelSwitchChange}
+              >
                 <ButtonText>Cancelar</ButtonText>
               </Button>
               <Button
                 size="lg"
-                variant='solid'
-                action='primary'
-                onPress={confirmSwitchChange}>
+                variant="solid"
+                action="primary"
+                onPress={confirmSwitchChange}
+              >
                 <ButtonText>Continuar</ButtonText>
               </Button>
             </View>
@@ -211,33 +338,41 @@ const PerfilScreen = () => {
 
       {/* Pontuação */}
       <View style={styles.pontuacaoContainer}>
-        {participarRanking && (
+        {watch('rankingParticipant') && (
           <View style={styles.pontuacaoItem}>
-            <Text style={styles.pontuacaoNumero}>{usuario.ranking}°</Text>
-            <Text>Ranking</Text>
+            <Text className="font-raleway" style={styles.pontuacaoNumero}>
+              {rankingData?.points}°
+            </Text>
+            <Text className="font-raleway">Ranking</Text>
           </View>
         )}
         <View style={styles.pontuacaoItem}>
-          <Text style={styles.pontuacaoNumero}>{usuario.respostas}</Text>
-          <Text>Respostas</Text>
+          <Text className="font-raleway" style={styles.pontuacaoNumero}>
+            {usuario.respostas}
+          </Text>
+          <Text className="font-raleway">Respostas</Text>
         </View>
         <View style={styles.pontuacaoItem}>
-          <Text style={styles.pontuacaoNumero}>{usuario.perguntas}</Text>
-          <Text>Perguntas</Text>
+          <Text className="font-raleway" style={styles.pontuacaoNumero}>
+            {usuario.perguntas}
+          </Text>
+          <Text className="font-raleway">Perguntas</Text>
         </View>
       </View>
       <View style={styles.pontuacaoContainer}>
-        {participarRanking && (
+        {watch('rankingParticipant') && (
           <View style={styles.pontuacaoItem}>
-            <Text style={styles.pontuacaoNumero}>4,75⭐</Text>
-            <Text>Média</Text>
+            <Text className="font-raleway" style={styles.pontuacaoNumero}>
+              4,75⭐
+            </Text>
+            <Text className="font-raleway">Média</Text>
           </View>
         )}
       </View>
       <View style={styles.pontuacaoContainer}>
-        {participarRanking && (
+        {watch('rankingParticipant') && (
           <View style={styles.moedasContainer}>
-            <Text style={styles.moedasTexto}>459</Text>
+            <Text style={styles.moedasTexto}>{rankingData?.points}{" "}</Text>
             <Coin></Coin>
           </View>
         )}
@@ -255,7 +390,9 @@ const PerfilScreen = () => {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Deseja sair da sua conta?</Text>
-            <Text style={styles.modalMessage}>Você precisará logar novamente na próxima vez que entrar.</Text>
+            <Text style={styles.modalMessage}>
+              Você precisará logar novamente na próxima vez que entrar.
+            </Text>
             <View style={styles.modalButtons}>
               <View style={{ flex: 1 }}>
                 <Button
@@ -282,26 +419,38 @@ const PerfilScreen = () => {
 
       <View style={styles.section}>
         <View style={styles.center}>
-          <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Conta</Text></View>
+          <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Conta</Text>
+        </View>
 
-        <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(change)')}>
-          <Text style={{ fontSize: 16, color: '#3b82f6' }}>Alterar senha</Text>
+        <TouchableOpacity
+          onPress={() => router.push('/(app)/(profile)/(change)')}
+        >
+          <Text
+            style={{ fontSize: 16, color: '#3b82f6' }}
+            className="font-raleway"
+          >
+            Alterar senha
+          </Text>
         </TouchableOpacity>
-
       </View>
-      <TouchableOpacity onPress={() => router.push('/(app)/(profile)/(delete)')}>
-        <Text style={styles.deleteLink}>Excluir conta</Text>
+      <TouchableOpacity
+        onPress={() => router.push('/(app)/(profile)/(delete)')}
+      >
+        <Text style={styles.deleteLink} className="font-raleway">
+          Excluir conta
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => {
-        setModalLogoutVisible(true)
-      }}>
+      <TouchableOpacity
+        onPress={() => {
+          setModalLogoutVisible(true);
+        }}
+      >
         <Text style={styles.logoutText}>Sair da conta</Text>
       </TouchableOpacity>
-
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -311,7 +460,8 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingBottom: 20, // Adiciona um padding no final para garantir que o conteúdo não seja cortado
   },
-  headerContainer: {// Aumenta a altura do header para dar mais espaço
+  headerContainer: {
+    // Aumenta a altura do header para dar mais espaço
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
@@ -347,7 +497,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: "",
+    borderColor: '',
     marginTop: 50, // Ajusta a margem para posicionar a imagem corretamente
   },
   headerTitle: {
@@ -378,7 +528,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   separator: {
     height: 1,

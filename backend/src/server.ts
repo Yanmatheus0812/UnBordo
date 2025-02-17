@@ -65,7 +65,7 @@ export async function socket(server: http.Server) {
 
   const ioServer = new Server(server);
 
-  Socket.getInstance(ioServer);
+  await Socket.getInstance(ioServer);
 
   logger.info('Socket is up!');
 }

@@ -75,6 +75,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     return student;
   };
+
+
   const authenticate = async (token: string) => {
     try {
       await AsyncStorage.setItem('unbordo@token', token);
