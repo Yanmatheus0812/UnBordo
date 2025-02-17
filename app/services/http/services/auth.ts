@@ -16,7 +16,6 @@ export const AuthService = {
     const result = api.get<IAuthService.Me.Response>(`/student/me`, {
       ...(token && { headers: { Authorization: `Bearer ${token}` } }),
     });
-    console.log(result)
     return result;
   },
 
@@ -36,6 +35,12 @@ export const AuthService = {
       `${PREFIX}/forgot-password/confirm-code`,
       body,
     );
+  },
+
+  sendToken: async (
+    body: { token: string; }
+  ) => {
+    return api.post(`${PREFIX}/send-token`, body);
   },
 
   changePassword: async (body: IAuthService.ChangePassword.Request) => {

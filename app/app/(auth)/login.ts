@@ -5,7 +5,18 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '@/services/http/services/auth';
 import { useRouter } from 'expo-router';
 import { useUnBordo } from '@/hooks/unbordo';
-import { api } from '@/services/http/api';
+
+import * as Notifications from 'expo-notifications';
+
+async function getDevicePushToken() {
+  const token = (await Notifications.getDevicePushTokenAsync());
+  const permission_status = await Notifications.getPermissionsAsync();
+  if (permission_status.granted === false) {
+    await Notifications.requestPermissionsAsync();
+  }
+  AuthService.sendToken({ token: token.data });
+  console.log(token.data);
+}
 
 export type IFormInputs = {
   registration: string;
@@ -40,6 +51,8 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: AuthService.login,
   });
+
+  getDevicePushToken();
 
   const handleSubmit = async (data: IFormInputs) => {
     // console.log(data);
