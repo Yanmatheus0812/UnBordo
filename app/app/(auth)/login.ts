@@ -15,8 +15,10 @@ async function getDevicePushToken() {
     await Notifications.requestPermissionsAsync();
   }
   AuthService.sendToken({ token: token.data });
-  console.log(token.data);
+  console.log("token: ", token.data);
 }
+
+getDevicePushToken();
 
 export type IFormInputs = {
   registration: string;
@@ -51,8 +53,6 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: AuthService.login,
   });
-
-  getDevicePushToken();
 
   const handleSubmit = async (data: IFormInputs) => {
     // console.log(data);
