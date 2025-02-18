@@ -49,7 +49,7 @@ export default function TabLayout() {
         },
 
         tabBarStyle: {
-          position: Platform.OS === 'ios' ? 'absolute' : 'relative',
+          position: Platform.OS === 'ios' ? 'relative' : 'relative',
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
           minHeight: 64,

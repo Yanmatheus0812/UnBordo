@@ -21,7 +21,12 @@
     "test:ci": "export $(cat ./env/.env.test | xargs) && vitest",
     "docker:update": "docker cp ./env/.env wunjo.backend:/app/env/.env",
     "docker:prisma": "docker exec wunjo.backend npm run prisma generate",
-    "docker:prisma:init": "docker exec wunjo.backend npm run prisma dev --name init"
+    "docker:prisma:init": "docker exec wunjo.backend npm run prisma dev --name init",
+    "docker:seed": "docker exec wunjo.backend npm run seed",
+    "seed": "tsx --env-file=./env/.env ./src/infra/orm/prisma/seeders/index.ts",
+    "seed:local": "tsx --env-file=./env/.env.local ./src/infra/orm/prisma/seeders/index.ts",
+    "seed:dev": "tsx --env-file=./env/.env.dev ./src/infra/orm/prisma/seeders/index.ts",
+    "seed:test": "tsx --env-file=./env/.env.test ./src/infra/orm/prisma/seeders/index.ts"
   },
   "keywords": [],
   "author": "",

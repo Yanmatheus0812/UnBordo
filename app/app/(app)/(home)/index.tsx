@@ -129,6 +129,7 @@ const ForumHome = () => {
         renderItem={({ item }) => (
           <CardItem item={item} setReportModalVisible={setReportModalVisible} />
         )}
+        contentContainerClassName='pt-4'
         ListEmptyComponent={() =>
           query.isFetching ? (
             <Box className="min-w-full flex flex-col gap-2 ">
