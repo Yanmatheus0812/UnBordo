@@ -21,6 +21,7 @@
 | **13/12/2024** | 0.2    | Atualização do documento | Sophia |
 | **26/01/2025** | 0.3    | Atualização das Sprints, backlog e gamificação | Sophia |
 | **14/02/2025** | 0.4    | Atualização do cronograma e ajustes | Sophia |
+| **18/02/2025** | 1.0    | Versão final | Sophia |
 
 
 ## **VISÃO GERAL DO PRODUTO**
@@ -149,7 +150,7 @@ Tabela 2: Divisão de responsabilidades
 |5|Cadastro e login de usuários|09/12/24|09/01/2025|API de cadastro e login no aplicativo|Equipe Back-End e Front-End|100%|
 |6|Dúvidas e fórum|09/01/25|20/01/25|Fórum e dúvidas|Equipe Back-End e Front-End|100%|
 |7|Chat entre perfis|20/01/25|02/02/25|Chat 1:1|Equipe Front-End e Back-End|100%|
-|9|Sistema de avaliação e gamificação|02/02/2025|16/02/25|Implementação das avaliações, ranqueamento e temporada|Equipe Back-end e Front-End|80%|
+|9|Sistema de avaliação e gamificação|02/02/2025|16/02/25|Implementação das avaliações, ranqueamento e temporada|Equipe Back-end e Front-End|100%|
 
 
 ### **Matriz de Comunicação**
