@@ -32,12 +32,29 @@ O sistema é desenvolvido pela equipe Wunjo e tem como objetivo criar um aplicat
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/121049783?v=4" width=100><br>
       <b><a href="https://github.com/gabemagioli">Gabriel Magioli</a></b><br>
-      Líder do projeto e desenvolvedor back-end
+      Líder do projeto
     </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/150614543?v=4" width=100><br>
+      <b><a href="https://github.com/arthurevg">Arthur Evangelista</a></b><br>
+      Desenvolvedor Front-end
+    </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/46327096?v=4" width=100><br>
       <b><a href="https://github.com/sluucke">David William</a></b><br>
       DevOps
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/149431855?v=4" width=100><br>
+      <b><a href="https://github.com/GiovanaFontesS">Giovana Fontes</a></b><br>
+      Desenvolvedora Front-end
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/99147725?v=4" width=100><br>
+      <b><a href="https://github.com/GustavoLinharess">Gustavo Linhares</a></b><br>
+      Desenvolvedor Front-end
     </td>
   </tr>
   <tr>
@@ -47,43 +64,26 @@ O sistema é desenvolvido pela equipe Wunjo e tem como objetivo criar um aplicat
       DevOps
     </td>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/150614543?v=4" width=100><br>
-      <b><a href="https://github.com/arthurevg">Arthur Evangelista</a></b><br>
-      Desenvolvedor front-end
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/99147725?v=4" width=100><br>
-      <b><a href="https://github.com/GustavoLinharess">Gustavo Linhares</a></b><br>
-      Desenvolvedor front-end
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/92001158?v=4" width=100><br>
-      <b><a href="https://github.com/Yanmatheus0812">Yan Matheus</a></b><br>
-      Desenvolvedor front-end
-    </td>
-    <td align="center">
       <img src="https://avatars.githubusercontent.com/u/166872122?v=4" width=100><br>
       <b><a href="https://github.com/leticialopes20">Leticia Lopes</a></b><br>
-      Desenvolvedora front-end
+      Desenvolvedora Front-end
     </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/149431855?v=4" width=100><br>
-      <b><a href="https://github.com/GiovanaFontesS">Giovana Fontes</a></b><br>
-      Desenvolvedora front-end
-    </td>
-  </tr>
-  <tr>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/162454522?v=4" width=100><br>
       <b><a href="https://github.com/Sophiassilva">Sophia Silva</a></b><br>
-      Desenvolvedora back-end
+      Desenvolvedora Back-end
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/75449306?v=4" width=100><br>
             <b><a href="https://github.com/Wooo589">Willian Silva</a></b><br>
-      Desenvolvedor back-end
+      Desenvolvedor Back-end
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/92001158?v=4" width=100><br>
+      <b><a href="https://github.com/Yanmatheus0812">Yan Matheus</a></b><br>
+      Desenvolvedor Front-end
     </td>
   </tr>
 </table>
