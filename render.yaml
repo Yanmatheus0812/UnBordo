@@ -8,7 +8,7 @@ services:
   - type: web
     name: wunjobackend
     env: node
-    branch: feat/app-integration
+    branch: main
     repo: https://github.com/FGA0138-MDS-Ajax/2024.2-Wunjo
     buildCommand: npm install
     startCommand: npm run prod

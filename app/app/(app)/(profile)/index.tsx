@@ -30,20 +30,6 @@ interface IFormInputs {
   rankingParticipant: boolean;
 }
 
-// Simulação de um usuário
-const usuario = {
-  id: '1',
-  nome: 'Renan V. Guedes',
-  avatar: require('@/assets/avatars/avatar1.webp'),
-  email: '21012345@aluno.unb.br',
-  titulo: 'Marujo',
-  curso: 'Engenharia Aeroespacial',
-  matricula: '21012345',
-  ranking: 1,
-  respostas: 42,
-  perguntas: 10,
-};
-
 const PerfilScreen = () => {
   const { auth } = useUnBordo();
   const { data, isFetching } = useQuery({
@@ -110,7 +96,6 @@ const PerfilScreen = () => {
     setIsEditingCurso(false);
   };
 
-  const [curso, setCurso] = useState(usuario.curso);
   // const [participarRanking, setParticiparRanking] = useState(true);
   const [isEditingNome, setIsEditingNome] = useState(false); // Estado para controlar a editabilidade do nome
   const [isEditingCurso, setIsEditingCurso] = useState(false); // Estado para controlar a editabilidade do curso
@@ -119,6 +104,8 @@ const PerfilScreen = () => {
   const [modalCursoVisible, setModalCursoVisible] = useState(false);
 
   const router = useRouter();
+
+  console.log(getValues('course'));
 
   if (isFetching) {
     return (
@@ -159,8 +146,8 @@ const PerfilScreen = () => {
     >
       {/* Header */}
       <ProfileHeaderComponent
-        photoUri={usuario.avatar}
-        title={usuario.titulo}
+        photoUri={require('@/assets/avatars/avatar1.webp')}
+        title={"Iniciante"}
         onBackPress={() => router.back()}
       />
 
@@ -189,14 +176,14 @@ const PerfilScreen = () => {
         <Select
           label="Curso"
           placeholder="Selecione seu curso"
-          value={curso}
+          value={getValues('course') === 'ENG' ? 'Engenharias' : getValues('course') === 'AEROSPACE' ? 'Engenharia Aeroespacial' : getValues('course') === 'ENERGY' ? 'Engenharia de Energia' : getValues('course') === 'SOFTWARE' ? 'Engenharia de Software' : 'Engenharia Eletrônica'}
           modalVisible={modalCursoVisible}
           setModalVisible={setModalCursoVisible}
         >
           {/* Lista de opções */}
           <TouchableOpacity
             onPress={() => {
-              setCurso('Engenharias');
+              setValue('course', 'ENG');
               setModalCursoVisible(false);
               setIsEditingCurso(true);
             }}
@@ -205,7 +192,7 @@ const PerfilScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCurso('Engenharia Aeroespacial');
+              setValue('course', 'AEROSPACE');
               setModalCursoVisible(false);
               setIsEditingCurso(true);
             }}
@@ -214,16 +201,7 @@ const PerfilScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCurso('Ciência da Computação');
-              setModalCursoVisible(false);
-              setIsEditingCurso(true);
-            }}
-          >
-            <Text style={styles.optionText}>Engenharia Automotiva</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setCurso('Engenharia de Energia');
+              setValue('course', 'ENERGY');
               setModalCursoVisible(false);
               setIsEditingCurso(true);
             }}
@@ -232,7 +210,7 @@ const PerfilScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCurso('Engenharia de Software');
+              setValue('course', 'SOFTWARE');
               setModalCursoVisible(false);
               setIsEditingCurso(true);
             }}
@@ -241,7 +219,7 @@ const PerfilScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCurso('Engenharia Eletrônica');
+              setValue('course', 'ELETRONIC');
               setModalCursoVisible(false);
               setIsEditingCurso(true);
             }}
@@ -338,23 +316,23 @@ const PerfilScreen = () => {
 
       {/* Pontuação */}
       <View style={styles.pontuacaoContainer}>
-        {watch('rankingParticipant') && (
+        {/* {watch('rankingParticipant') && (
           <View style={styles.pontuacaoItem}>
             <Text className="font-raleway" style={styles.pontuacaoNumero}>
-              {rankingData?.points}°
+              {rankingData?.}°
             </Text>
             <Text className="font-raleway">Ranking</Text>
           </View>
-        )}
+        )} */}
         <View style={styles.pontuacaoItem}>
           <Text className="font-raleway" style={styles.pontuacaoNumero}>
-            {usuario.respostas}
+            {0}
           </Text>
           <Text className="font-raleway">Respostas</Text>
         </View>
         <View style={styles.pontuacaoItem}>
           <Text className="font-raleway" style={styles.pontuacaoNumero}>
-            {usuario.perguntas}
+            {0}
           </Text>
           <Text className="font-raleway">Perguntas</Text>
         </View>
@@ -363,7 +341,7 @@ const PerfilScreen = () => {
         {watch('rankingParticipant') && (
           <View style={styles.pontuacaoItem}>
             <Text className="font-raleway" style={styles.pontuacaoNumero}>
-              4,75⭐
+              5⭐
             </Text>
             <Text className="font-raleway">Média</Text>
           </View>
