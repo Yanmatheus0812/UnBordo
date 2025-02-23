@@ -138,3 +138,9 @@ Rode o programa (código em caso de uso do Expo Go)
 ```
 npx expo start
 ```
+
+# Imagens:
+![Tela de Login](https://github.com/user-attachments/assets/47b5de58-036a-4109-873c-3ee1fbe74d11)
+![Página inicial](https://github.com/user-attachments/assets/d0b7a10d-59b4-4ac5-a37e-2e150999b1a5)
+![Postar dúvida](https://github.com/user-attachments/assets/aea68feb-0b14-4976-bfe6-8d05c66f0ae3)
+![Ranking](https://github.com/user-attachments/assets/731b839c-d4f8-4ecc-92dc-d8c817df8b0c)
